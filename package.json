@@ -9,6 +9,7 @@
     "README.md"
   ],
   "scripts": {
+    "prepare": "npm run build",
     "build": "tsc -p tsconfig.json",
     "test": "jest --runInBand",
     "lint": "echo 'TODO: add eslint' && exit 0",
@@ -27,10 +28,7 @@
     "@types/react-dom": "^18.2.0",
     "typescript": "^5.0.0"
   },
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
+  "dependencies": {},
   "peerDependencies": {
     "react": "^17 || ^18",
     "react-dom": "^17 || ^18"
