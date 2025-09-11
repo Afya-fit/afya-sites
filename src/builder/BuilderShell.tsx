@@ -1,6 +1,6 @@
 import React from 'react'
 import { useBuilder } from './context/BuilderProvider'
-import { publishSite, getPublishStatus } from '@/http/sites/siteConfig'
+import { publishSite, getPublishStatus } from '../shared/api'
 
 function isValidSlug(s: string) {
   return /^[a-z0-9-]{2,50}$/.test(s)

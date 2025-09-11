@@ -1,7 +1,7 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
-import type { SiteConfig, SectionUnion } from '@/sites/renderer/src/types'
-import { normalizeSections } from '@/sites/renderer/src/sectionRegistry'
-import { fetchPublicSiteData, saveSiteDraft } from '@/http/sites/siteConfig'
+import type { SiteConfig, SectionUnion } from '../../renderer/types'
+import { normalizeSections } from '../../renderer/sectionRegistry'
+import { fetchPublicSiteData, saveSiteDraft } from '../../shared/api'
 
 type BuilderView = 'draft' | 'published'
 type BuilderDevice = 'desktop' | 'mobile'

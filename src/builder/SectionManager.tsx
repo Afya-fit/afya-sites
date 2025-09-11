@@ -1,6 +1,6 @@
 import React from 'react'
 import { useBuilder } from './context/BuilderProvider'
-import { isAddable } from '@/sites/renderer/src/sectionRegistry'
+import { isAddable } from '../renderer/sectionRegistry'
 import HeroEditor from './InlineEditors/HeroEditor'
 import ContentBlockEditor from './InlineEditors/ContentBlockEditor'
 import BusinessDataEditor from './InlineEditors/BusinessDataEditor'

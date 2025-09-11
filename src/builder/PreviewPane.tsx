@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo } from 'react'
 import Head from 'next/head'
 import { useBuilder } from './context/BuilderProvider'
-import SectionRenderer from '@/sites/renderer/src/SectionRenderer'
-import BrandThemeProvider from '@/sites/renderer/src/theme/BrandThemeProvider'
-import { shouldRender } from '@/sites/renderer/src/sectionRegistry'
+import SectionRenderer from '../renderer/SectionRenderer'
+import BrandThemeProvider from '../renderer/theme/BrandThemeProvider'
+import { shouldRender } from '../renderer/sectionRegistry'
 
 export default function PreviewPane() {
   const { draft, published, view, device, selectedIndex, platformData } = useBuilder()
