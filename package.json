@@ -1,6 +1,6 @@
 {
   "name": "@afya/sites",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Afya Sites - Site Builder and Renderer",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
