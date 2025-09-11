@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "test": "echo 'TODO: add tests' && exit 0",
+    "test": "jest --runInBand",
     "lint": "echo 'TODO: add eslint' && exit 0",
     "type-check": "tsc --noEmit"
   },
