@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo } from 'react'
-import Head from 'next/head'
 import { useBuilder } from './context/BuilderProvider'
 import SectionRenderer from '../renderer/SectionRenderer'
 import BrandThemeProvider from '../renderer/theme/BrandThemeProvider'
@@ -44,12 +43,6 @@ export default function PreviewPane() {
         zIndex: 0,
       }}
     >
-      <Head>
-        <meta
-          httpEquiv="Content-Security-Policy"
-          content="default-src 'self'; img-src 'self' data: https:; script-src 'self' 'unsafe-eval' 'unsafe-inline' blob: https:; style-src 'self' 'unsafe-inline'; font-src 'self' data: https:; connect-src 'self' https: ws: wss:; frame-ancestors 'self'"
-        />
-      </Head>
       <BrandThemeProvider config={active}>
         {active.sections && active.sections.length > 0 ? (
           <SectionRenderer

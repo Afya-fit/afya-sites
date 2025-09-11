@@ -1,5 +1,3 @@
-export * from './shared/types'
-
 // Builder exports
 export { default as BuilderProvider } from './builder/context/BuilderProvider'
 export { default as BuilderShell } from './builder/BuilderShell'

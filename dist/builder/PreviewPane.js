@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = PreviewPane;
 const jsx_runtime_1 = require("react/jsx-runtime");
 const react_1 = require("react");
-const head_1 = __importDefault(require("next/head"));
 const BuilderProvider_1 = require("./context/BuilderProvider");
 const SectionRenderer_1 = __importDefault(require("../renderer/SectionRenderer"));
 const BrandThemeProvider_1 = __importDefault(require("../renderer/theme/BrandThemeProvider"));
@@ -38,7 +37,7 @@ function PreviewPane() {
     }, [active, selectedIndex]);
     if (!active)
         return (0, jsx_runtime_1.jsx)("div", { style: { padding: 16, opacity: .6 }, children: "Loading\u2026" });
-    return ((0, jsx_runtime_1.jsxs)("div", { className: 'site-preview', style: {
+    return ((0, jsx_runtime_1.jsx)("div", { className: 'site-preview', style: {
             background: 'var(--sb-color-surface)',
             width: device === 'mobile' ? 375 : '100%',
             marginInline: device === 'mobile' ? 'auto' : undefined,
@@ -49,5 +48,5 @@ function PreviewPane() {
             overflowY: 'auto',
             position: 'relative',
             zIndex: 0,
-        }, children: [(0, jsx_runtime_1.jsx)(head_1.default, { children: (0, jsx_runtime_1.jsx)("meta", { httpEquiv: "Content-Security-Policy", content: "default-src 'self'; img-src 'self' data: https:; script-src 'self' 'unsafe-eval' 'unsafe-inline' blob: https:; style-src 'self' 'unsafe-inline'; font-src 'self' data: https:; connect-src 'self' https: ws: wss:; frame-ancestors 'self'" }) }), (0, jsx_runtime_1.jsx)(BrandThemeProvider_1.default, { config: active, children: active.sections && active.sections.length > 0 ? ((0, jsx_runtime_1.jsx)(SectionRenderer_1.default, { sections: active.sections, data: { site_config: active, platform_data: platformData || {}, __preview_device: device, __visible_indices: visibleIndices } })) : ((0, jsx_runtime_1.jsxs)("div", { style: { padding: 24, color: 'var(--sb-color-text)' }, children: [(0, jsx_runtime_1.jsx)("strong", { children: "No sections yet." }), (0, jsx_runtime_1.jsx)("div", { style: { marginTop: 8, opacity: .8 }, children: "Use the Sections panel to add your first section." })] })) })] }));
+        }, children: (0, jsx_runtime_1.jsx)(BrandThemeProvider_1.default, { config: active, children: active.sections && active.sections.length > 0 ? ((0, jsx_runtime_1.jsx)(SectionRenderer_1.default, { sections: active.sections, data: { site_config: active, platform_data: platformData || {}, __preview_device: device, __visible_indices: visibleIndices } })) : ((0, jsx_runtime_1.jsxs)("div", { style: { padding: 24, color: 'var(--sb-color-text)' }, children: [(0, jsx_runtime_1.jsx)("strong", { children: "No sections yet." }), (0, jsx_runtime_1.jsx)("div", { style: { marginTop: 8, opacity: .8 }, children: "Use the Sections panel to add your first section." })] })) }) }));
 }

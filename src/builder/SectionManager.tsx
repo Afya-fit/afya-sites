@@ -6,6 +6,7 @@ import ContentBlockEditor from './InlineEditors/ContentBlockEditor'
 import BusinessDataEditor from './InlineEditors/BusinessDataEditor'
 import LinksPageEditor from './InlineEditors/LinksPageEditor'
 import ScheduleEditor from './InlineEditors/ScheduleEditor'
+import ImageSettingsPanel from './ImageSettingsPanel'
 
 export default function SectionManager() {
   const { draft, addSection, removeSection, selectedIndex, setSelectedIndex, reorderSections } = useBuilder()
@@ -193,8 +194,7 @@ function SectionEditorContainer({ sectionType }: { sectionType: string }) {
 function InlineImageSettings() {
   // Reuse the existing panel component but render its inner content inline
   // We'll import and render ImageSettingsPanel inline without the overlay/backdrop
-  const Panel = require('./ImageSettingsPanel').default
-  return <Panel inline />
+  return <ImageSettingsPanel inline />
 }
 
 

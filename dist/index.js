@@ -15,9 +15,6 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 }) : function(o, v) {
     o["default"] = v;
 });
-var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
-};
 var __importStar = (this && this.__importStar) || (function () {
     var ownKeys = function(o) {
         ownKeys = Object.getOwnPropertyNames || function (o) {
@@ -40,7 +37,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SectionRegistry = exports.BrandThemeProvider = exports.SectionRenderer = exports.PreviewPane = exports.SectionManager = exports.BuilderShell = exports.BuilderProvider = void 0;
-__exportStar(require("./shared/types"), exports);
 // Builder exports
 var BuilderProvider_1 = require("./builder/context/BuilderProvider");
 Object.defineProperty(exports, "BuilderProvider", { enumerable: true, get: function () { return __importDefault(BuilderProvider_1).default; } });
