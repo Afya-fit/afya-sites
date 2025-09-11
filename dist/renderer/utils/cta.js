@@ -1,4 +1,7 @@
-export function buildCtaHref(baseHref, utm) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.buildCtaHref = buildCtaHref;
+function buildCtaHref(baseHref, utm) {
     try {
         const url = new URL(baseHref, 'https://example.com');
         if (utm) {

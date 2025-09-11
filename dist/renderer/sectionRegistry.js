@@ -1,3 +1,9 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getRule = getRule;
+exports.isAddable = isAddable;
+exports.shouldRender = shouldRender;
+exports.normalizeSections = normalizeSections;
 const rules = {
     hero: { renderPolicy: 'always', addable: true },
     content_block: { renderPolicy: 'always', addable: true },
@@ -6,14 +12,14 @@ const rules = {
     links_page: { renderPolicy: 'only_selected', singleton: true, defaultPosition: 'top', addable: true },
     schedule: { renderPolicy: 'always', addable: true },
 };
-export function getRule(type) {
+function getRule(type) {
     return rules[type] || { renderPolicy: 'always' };
 }
-export function isAddable(type) {
+function isAddable(type) {
     const r = getRule(type);
     return r.addable !== false;
 }
-export function shouldRender(section, index, ctx) {
+function shouldRender(section, index, ctx) {
     const r = getRule(section.type);
     if (r.renderPolicy === 'only_selected') {
         return ctx.selectedIndex === index;
@@ -24,7 +30,7 @@ export function shouldRender(section, index, ctx) {
         return false;
     return true;
 }
-export function normalizeSections(sections) {
+function normalizeSections(sections) {
     const seen = new Set();
     const out = [];
     // Pass 1: collect non-links and ensure singletons only once

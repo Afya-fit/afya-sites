@@ -1,7 +1,10 @@
-import { jsx as _jsx } from "react/jsx-runtime";
-import { useMemo } from 'react';
-export function BrandThemeProvider({ config, children }) {
-    const styleVars = useMemo(() => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.BrandThemeProvider = BrandThemeProvider;
+const jsx_runtime_1 = require("react/jsx-runtime");
+const react_1 = require("react");
+function BrandThemeProvider({ config, children }) {
+    const styleVars = (0, react_1.useMemo)(() => {
         const mode = config?.theme?.mode || 'light';
         const surface = mode === 'dark' ? '#0f1115' : '#ffffff';
         const text = mode === 'dark' ? '#eaeaea' : '#111111';
@@ -15,6 +18,6 @@ export function BrandThemeProvider({ config, children }) {
             ['--sb-color-brand']: brand,
         };
     }, [config]);
-    return (_jsx("div", { style: styleVars, children: children }));
+    return ((0, jsx_runtime_1.jsx)("div", { style: styleVars, children: children }));
 }
-export default BrandThemeProvider;
+exports.default = BrandThemeProvider;

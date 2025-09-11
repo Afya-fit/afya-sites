@@ -1,34 +1,38 @@
-import { jsx as _jsx } from "react/jsx-runtime";
-import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
-import { normalizeSections } from '../../renderer/sectionRegistry';
-import { fetchPublicSiteData, saveSiteDraft } from '../../shared/api';
-const BuilderContext = createContext(undefined);
-export function useBuilder() {
-    const ctx = useContext(BuilderContext);
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.useBuilder = useBuilder;
+exports.BuilderProvider = BuilderProvider;
+const jsx_runtime_1 = require("react/jsx-runtime");
+const react_1 = require("react");
+const sectionRegistry_1 = require("../../renderer/sectionRegistry");
+const api_1 = require("../../shared/api");
+const BuilderContext = (0, react_1.createContext)(undefined);
+function useBuilder() {
+    const ctx = (0, react_1.useContext)(BuilderContext);
     if (!ctx)
         throw new Error('useBuilder must be used within BuilderProvider');
     return ctx;
 }
-export function BuilderProvider({ businessId, children }) {
-    const [slug, setSlug] = useState('');
-    const [draft, setDraft] = useState(null);
-    const [published, setPublished] = useState(null);
-    const [platformData, setPlatformData] = useState(null);
-    const [view, setView] = useState('draft');
-    const [device, setDevice] = useState('desktop');
-    const [lastSavedAt, setLastSavedAt] = useState(null);
-    const [selectedIndex, setSelectedIndex] = useState(null);
-    const [hydratedFromLocal, setHydratedFromLocal] = useState(false);
-    const hydratedFromLocalRef = useRef(false);
-    const [panelView, setPanelView] = useState('editor');
-    const reload = useCallback(async () => {
+function BuilderProvider({ businessId, children }) {
+    const [slug, setSlug] = (0, react_1.useState)('');
+    const [draft, setDraft] = (0, react_1.useState)(null);
+    const [published, setPublished] = (0, react_1.useState)(null);
+    const [platformData, setPlatformData] = (0, react_1.useState)(null);
+    const [view, setView] = (0, react_1.useState)('draft');
+    const [device, setDevice] = (0, react_1.useState)('desktop');
+    const [lastSavedAt, setLastSavedAt] = (0, react_1.useState)(null);
+    const [selectedIndex, setSelectedIndex] = (0, react_1.useState)(null);
+    const [hydratedFromLocal, setHydratedFromLocal] = (0, react_1.useState)(false);
+    const hydratedFromLocalRef = (0, react_1.useRef)(false);
+    const [panelView, setPanelView] = (0, react_1.useState)('editor');
+    const reload = (0, react_1.useCallback)(async () => {
         try {
-            const json = await fetchPublicSiteData(businessId);
+            const json = await (0, api_1.fetchPublicSiteData)(businessId);
             const cfg = (json?.site_config || null);
             // Prefer local draft if present; only apply backend cfg when we didn't hydrate locally
             if (cfg && !hydratedFromLocalRef.current) {
                 try {
-                    const normalized = { ...cfg, sections: normalizeSections(cfg.sections) };
+                    const normalized = { ...cfg, sections: (0, sectionRegistry_1.normalizeSections)(cfg.sections) };
                     setDraft(normalized);
                 }
                 catch {
@@ -43,7 +47,7 @@ export function BuilderProvider({ businessId, children }) {
             // keep as-is on failure
         }
     }, [businessId]);
-    useEffect(() => {
+    (0, react_1.useEffect)(() => {
         // Try to hydrate from localStorage first
         try {
             const raw = localStorage.getItem(`sb:${businessId}`);
@@ -71,7 +75,7 @@ export function BuilderProvider({ businessId, children }) {
         reload();
     }, [businessId, reload]);
     // Autosave stub (localStorage) when draft/slug changes
-    useEffect(() => {
+    (0, react_1.useEffect)(() => {
         const t = setTimeout(() => {
             try {
                 const payload = JSON.stringify({ slug, draft });
@@ -82,7 +86,7 @@ export function BuilderProvider({ businessId, children }) {
         }, 600);
         return () => clearTimeout(t);
     }, [businessId, slug, draft]);
-    const value = useMemo(() => ({
+    const value = (0, react_1.useMemo)(() => ({
         businessId,
         slug,
         setSlug,
@@ -138,7 +142,7 @@ export function BuilderProvider({ businessId, children }) {
                 localStorage.setItem(`sb:${businessId}`, payload);
                 // fire-and-forget backend stub
                 try {
-                    await saveSiteDraft(businessId, { slug, draft });
+                    await (0, api_1.saveSiteDraft)(businessId, { slug, draft });
                 }
                 catch { }
                 setLastSavedAt(new Date());
@@ -155,6 +159,6 @@ export function BuilderProvider({ businessId, children }) {
         panelView,
         setPanelView,
     }), [businessId, slug, draft, published, platformData, view, device, reload, lastSavedAt, selectedIndex, panelView]);
-    return _jsx(BuilderContext.Provider, { value: value, children: children });
+    return (0, jsx_runtime_1.jsx)(BuilderContext.Provider, { value: value, children: children });
 }
-export default BuilderProvider;
+exports.default = BuilderProvider;

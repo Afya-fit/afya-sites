@@ -1,4 +1,7 @@
-export function isSmallArt(width, height) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.isSmallArt = isSmallArt;
+function isSmallArt(width, height) {
     if (!width || !height)
         return true;
     const area = width * height;

@@ -1,12 +1,18 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import Hero from './components/sections/Hero';
-import ContentBlock from './components/sections/ContentBlock';
-import BusinessData from './components/sections/BusinessData';
-import SpecialOffers from './components/sections/SpecialOffers';
-import LinksPage from './components/sections/LinksPage';
-import Schedule from './components/sections/Schedule';
-import SiteHeader from './components/SiteHeader';
-export default function SectionRenderer(props) {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = SectionRenderer;
+const jsx_runtime_1 = require("react/jsx-runtime");
+const Hero_1 = __importDefault(require("./components/sections/Hero"));
+const ContentBlock_1 = __importDefault(require("./components/sections/ContentBlock"));
+const BusinessData_1 = __importDefault(require("./components/sections/BusinessData"));
+const SpecialOffers_1 = __importDefault(require("./components/sections/SpecialOffers"));
+const LinksPage_1 = __importDefault(require("./components/sections/LinksPage"));
+const Schedule_1 = __importDefault(require("./components/sections/Schedule"));
+const SiteHeader_1 = __importDefault(require("./components/SiteHeader"));
+function SectionRenderer(props) {
     const { sections } = props;
     const visible = props.data?.__visible_indices;
     if (!sections || sections.length === 0) {
@@ -15,22 +21,22 @@ export default function SectionRenderer(props) {
     // Expose data to children without prop-drilling for preview hints
     ;
     globalThis.__SB_RENDER_DATA = props.data;
-    return (_jsxs("div", { children: [_jsx(SiteHeader, { businessName: props.data?.platform_data?.business_info?.name || '' }), sections.map((section, index) => {
+    return ((0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)(SiteHeader_1.default, { businessName: props.data?.platform_data?.business_info?.name || '' }), sections.map((section, index) => {
                 if (Array.isArray(visible) && !visible.includes(index))
                     return null;
                 switch (section.type) {
                     case 'hero':
-                        return (_jsx("div", { "data-sb-section-index": index, children: _jsx(Hero, { section: section }) }, index));
+                        return ((0, jsx_runtime_1.jsx)("div", { "data-sb-section-index": index, children: (0, jsx_runtime_1.jsx)(Hero_1.default, { section: section }) }, index));
                     case 'content_block':
-                        return (_jsx("div", { "data-sb-section-index": index, children: _jsx(ContentBlock, { section: section }) }, index));
+                        return ((0, jsx_runtime_1.jsx)("div", { "data-sb-section-index": index, children: (0, jsx_runtime_1.jsx)(ContentBlock_1.default, { section: section }) }, index));
                     case 'business_data':
-                        return (_jsx("div", { "data-sb-section-index": index, children: _jsx(BusinessData, { section: section, data: props.data }) }, index));
+                        return ((0, jsx_runtime_1.jsx)("div", { "data-sb-section-index": index, children: (0, jsx_runtime_1.jsx)(BusinessData_1.default, { section: section, data: props.data }) }, index));
                     case 'special_offers':
-                        return (_jsx("div", { "data-sb-section-index": index, children: _jsx(SpecialOffers, { section: section }) }, index));
+                        return ((0, jsx_runtime_1.jsx)("div", { "data-sb-section-index": index, children: (0, jsx_runtime_1.jsx)(SpecialOffers_1.default, { section: section }) }, index));
                     case 'links_page':
-                        return (_jsx("div", { "data-sb-section-index": index, children: _jsx(LinksPage, { section: section }) }, index));
+                        return ((0, jsx_runtime_1.jsx)("div", { "data-sb-section-index": index, children: (0, jsx_runtime_1.jsx)(LinksPage_1.default, { section: section }) }, index));
                     case 'schedule':
-                        return (_jsx("div", { "data-sb-section-index": index, children: _jsx(Schedule, { section: section, data: props.data }) }, index));
+                        return ((0, jsx_runtime_1.jsx)("div", { "data-sb-section-index": index, children: (0, jsx_runtime_1.jsx)(Schedule_1.default, { section: section, data: props.data }) }, index));
                     default:
                         return null;
                 }

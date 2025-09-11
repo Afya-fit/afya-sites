@@ -1,4 +1,7 @@
-import { jsx as _jsx } from "react/jsx-runtime";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = MediaFrame;
+const jsx_runtime_1 = require("react/jsx-runtime");
 function toAspect(r) {
     switch (r) {
         case '1x1':
@@ -35,12 +38,12 @@ function ratioToNumber(r) {
             return undefined;
     }
 }
-export default function MediaFrame({ src, alt, ratio = '16x9', fit = 'cover', style, className, background, heightPx }) {
+function MediaFrame({ src, alt, ratio = '16x9', fit = 'cover', style, className, background, heightPx }) {
     const aspect = toAspect(ratio);
     const ratioNum = ratioToNumber(ratio);
     const heightMode = typeof heightPx === 'number' && heightPx > 0 && ratioNum;
     const computedWidth = heightMode ? heightPx * ratioNum : undefined;
-    return (_jsx("div", { className: className, style: {
+    return ((0, jsx_runtime_1.jsx)("div", { className: className, style: {
             position: 'relative',
             width: heightMode ? `${computedWidth}px` : '100%',
             aspectRatio: heightMode ? undefined : aspect,
@@ -48,7 +51,7 @@ export default function MediaFrame({ src, alt, ratio = '16x9', fit = 'cover', st
             overflow: 'hidden',
             background: background ?? 'transparent',
             ...style,
-        }, children: _jsx("img", { src: src, alt: alt || '', loading: 'lazy', decoding: 'async', style: {
+        }, children: (0, jsx_runtime_1.jsx)("img", { src: src, alt: alt || '', loading: 'lazy', decoding: 'async', style: {
                 width: '100%',
                 height: '100%',
                 objectFit: fit,
