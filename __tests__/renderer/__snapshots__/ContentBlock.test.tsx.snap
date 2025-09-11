@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContentBlock renders title, body and media 1`] = `
+<DocumentFragment>
+  <section
+    style="padding: 40px 16px; border-bottom: 1px solid #eee;"
+  >
+    <div
+      style="max-width: 1000px; margin: 0px auto;"
+    >
+      <div
+        style="display: grid; gap: 16px;"
+      >
+        <div
+          style="max-width: 960px; margin-inline: auto; width: 100%;"
+        >
+          <figure
+            style="margin: 0px;"
+          >
+            <div
+              style="position: relative; width: 100%; overflow: hidden; background: transparent;"
+            >
+              <img
+                alt="Alt"
+                decoding="async"
+                loading="lazy"
+                src="https://example.com/img.jpg"
+                style="width: 100%; height: 100%; object-fit: cover; display: block;"
+              />
+            </div>
+          </figure>
+        </div>
+        <div
+          style="text-align: left;"
+        >
+          <h2
+            style="margin-top: 0px;"
+          >
+            Small-group training
+          </h2>
+          <p>
+            Build strength and community
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</DocumentFragment>
+`;

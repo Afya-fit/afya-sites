@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Hero renders title and subtitle 1`] = `
+<DocumentFragment>
+  <section
+    aria-label="Hero"
+    style="position: relative; padding: 56px 16px; min-height: 280px; background: rgb(255, 255, 255); border-bottom: 1px solid #eee;"
+  >
+    <div
+      style="max-width: 1000px; margin: 0px auto; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center; min-height: 200px;"
+    >
+      <h1
+        style="margin: 0px;"
+      >
+        Welcome
+      </h1>
+      <p
+        style="margin: 0px; color: rgb(85, 85, 85);"
+      >
+        Sub
+      </p>
+    </div>
+  </section>
+</DocumentFragment>
+`;
