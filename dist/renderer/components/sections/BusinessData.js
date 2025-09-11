@@ -1,0 +1,14 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+export default function BusinessData({ section, data }) {
+    const info = data?.platform_data?.business_info || {};
+    const programs = data?.platform_data?.programs || [];
+    const products = data?.platform_data?.products || [];
+    const schedule = data?.platform_data?.schedule || [];
+    return (_jsx("section", { style: { padding: '40px 16px', borderBottom: '1px solid #eee' }, children: _jsxs("div", { style: { maxWidth: 1000, margin: '0 auto' }, children: [section.title ? _jsx("h2", { style: { marginTop: 0 }, children: section.title }) : null, _jsxs("div", { style: { display: 'grid', gap: 16 }, children: [(section.fields?.includes('business_info') ?? true) && (_jsxs("ul", { style: { paddingLeft: 16 }, children: [_jsxs("li", { children: [_jsx("strong", { children: "Name:" }), " ", info.name || '-'] }), _jsxs("li", { children: [_jsx("strong", { children: "Phone:" }), " ", info.phone || '-'] }), _jsxs("li", { children: [_jsx("strong", { children: "Email:" }), " ", info.email || '-'] }), _jsxs("li", { children: [_jsx("strong", { children: "Address:" }), " ", info.address || '-'] }), _jsxs("li", { children: [_jsx("strong", { children: "Timezone:" }), " ", info.timezone || '-'] })] })), (section.fields?.includes('programs')) && programs.length > 0 && (_jsxs("div", { children: [_jsx("strong", { children: "Programs" }), _jsx("ul", { style: { paddingLeft: 16 }, children: programs.slice(0, 6).map((p, i) => (_jsx("li", { children: p.name || p.title || 'Program' }, i))) })] })), (section.fields?.includes('products')) && products.length > 0 && (_jsxs("div", { children: [_jsx("strong", { children: "Products" }), _jsx("ul", { style: { paddingLeft: 16 }, children: products.slice(0, 6).map((p, i) => (_jsx("li", { children: p.name || p.title || 'Product' }, i))) })] })), (section.fields?.includes('schedule')) && (_jsxs("div", { children: [_jsx("strong", { children: "Schedule (next)" }), schedule.length > 0 ? (_jsx("ul", { style: { paddingLeft: 16 }, children: schedule.slice(0, 5).map((s, i) => {
+                                        const d = s.starts_at ? new Date(s.starts_at) : null;
+                                        const day = d ? d.toLocaleDateString(undefined, { weekday: 'short' }) : '-';
+                                        const date = d ? d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : '-';
+                                        const time = d ? d.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' }) : '-';
+                                        return (_jsxs("li", { children: [_jsx("strong", { children: s.title || 'Class' }), " \u2014 ", day, ", ", date, " at ", time] }, i));
+                                    }) })) : (_jsx("div", { style: { opacity: .7 }, children: "No upcoming sessions." }))] }))] })] }) }));
+}

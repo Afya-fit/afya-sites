@@ -1,0 +1,35 @@
+import React from 'react';
+import type { SiteConfig, SectionUnion } from '../../renderer/types';
+type BuilderView = 'draft' | 'published';
+type BuilderDevice = 'desktop' | 'mobile';
+type PanelView = 'editor' | 'media';
+type BuilderContextValue = {
+    businessId: string;
+    slug: string;
+    setSlug: (s: string) => void;
+    draft: SiteConfig | null;
+    published: SiteConfig | null;
+    platformData: Record<string, any> | null;
+    view: BuilderView;
+    setView: (v: BuilderView) => void;
+    device: BuilderDevice;
+    setDevice: (d: BuilderDevice) => void;
+    reload: () => Promise<void>;
+    addSection: (section: SectionUnion) => void;
+    removeSection: (index: number) => void;
+    lastSavedAt: Date | null;
+    selectedIndex: number | null;
+    setSelectedIndex: (i: number | null) => void;
+    updateSection: (index: number, patch: Partial<SectionUnion>) => void;
+    save: () => Promise<void>;
+    reorderSections: (next: SectionUnion[]) => void;
+    panelView: PanelView;
+    setPanelView: (v: PanelView) => void;
+};
+export declare function useBuilder(): BuilderContextValue;
+type Props = {
+    businessId: string;
+    children: React.ReactNode;
+};
+export declare function BuilderProvider({ businessId, children }: Props): import("react/jsx-runtime").JSX.Element;
+export default BuilderProvider;
