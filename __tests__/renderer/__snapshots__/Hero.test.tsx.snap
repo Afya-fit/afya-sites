@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Hero applies brand text color when textColorMode=brand 1`] = `
+<DocumentFragment>
+  <section
+    aria-label="Hero: Brand Title"
+    class="sb-hero-section"
+    data-align="center"
+    data-layout="media_top"
+    data-sb-section="hero"
+    data-text-mode="brand"
+    data-valign="center"
+    id="section-undefined"
+    style="--sb-hero-text-color: var(--sb-color-brand); --sb-hero-title-adaptive: 1.1;"
+  >
+    <div
+      class="sb-hero-content-container"
+      data-align="center"
+    >
+      <div
+        class="sb-hero-text-content"
+      >
+        <h1
+          class="sb-hero-title"
+        >
+          Brand Title
+        </h1>
+        <p
+          class="sb-hero-subtitle"
+        >
+          Neutral sub
+        </p>
+      </div>
+    </div>
+  </section>
+</DocumentFragment>
+`;
+
+exports[`Hero defaults to neutral text color when textColorMode is neutral/undefined 1`] = `
+<DocumentFragment>
+  <section
+    aria-label="Hero: Neutral Title"
+    class="sb-hero-section"
+    data-align="center"
+    data-layout="media_top"
+    data-sb-section="hero"
+    data-valign="center"
+    id="section-undefined"
+    style="--sb-hero-title-adaptive: 1.1;"
+  >
+    <div
+      class="sb-hero-content-container"
+      data-align="center"
+    >
+      <div
+        class="sb-hero-text-content"
+      >
+        <h1
+          class="sb-hero-title"
+        >
+          Neutral Title
+        </h1>
+      </div>
+    </div>
+  </section>
+</DocumentFragment>
+`;
+
+exports[`Hero renders title and subtitle 1`] = `
+<DocumentFragment>
+  <section
+    aria-label="Hero: Welcome"
+    class="sb-hero-section"
+    data-align="center"
+    data-layout="media_top"
+    data-sb-section="hero"
+    data-valign="center"
+    id="section-undefined"
+    style="--sb-justify-content: center; --sb-text-align: center; --sb-align-items: center; --sb-hero-title-adaptive: 1.1;"
+  >
+    <div
+      class="sb-hero-content-container"
+      data-align="center"
+    >
+      <div
+        class="sb-hero-text-content"
+      >
+        <h1
+          class="sb-hero-title"
+        >
+          Welcome
+        </h1>
+        <p
+          class="sb-hero-subtitle"
+        >
+          Sub
+        </p>
+      </div>
+    </div>
+  </section>
+</DocumentFragment>
+`;

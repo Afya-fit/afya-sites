@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SiteHeader renders business name and optional logo 1`] = `
+<DocumentFragment>
+  <header
+    style="padding: 12px 16px;"
+  >
+    <div
+      style="display: flex; align-items: center; gap: 12px;"
+    >
+      <img
+        alt="Demo Gym"
+        src="https://example.com/logo.png"
+        style="height: 32px; width: 32px; object-fit: contain;"
+      />
+      <strong>
+        Demo Gym
+      </strong>
+    </div>
+  </header>
+</DocumentFragment>
+`;

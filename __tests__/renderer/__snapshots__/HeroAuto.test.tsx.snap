@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Hero auto text color renders with auto mode and falls back to token color on SSR/jsdom 1`] = `
+<DocumentFragment>
+  <section
+    aria-label="Hero: Auto Title"
+    class="sb-hero-section"
+    data-align="center"
+    data-layout="media_top"
+    data-sb-section="hero"
+    data-text-mode="auto"
+    data-valign="center"
+    id="section-undefined"
+    style="--sb-hero-bg-image: url(/assets/hero.jpg); --sb-hero-title-adaptive: 1.1; --sb-hero-bg-size: cover;"
+  >
+    <div
+      class="sb-hero-content-container"
+      data-align="center"
+    >
+      <div
+        class="sb-hero-text-content"
+      >
+        <h1
+          class="sb-hero-title"
+        >
+          Auto Title
+        </h1>
+      </div>
+    </div>
+  </section>
+</DocumentFragment>
+`;

@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Schedule renders chips for window and shows sessions 1`] = `
+<DocumentFragment>
+  <section
+    aria-label="Schedule: Schedule"
+    class="sb-schedule-section"
+    data-sb-section="schedule"
+    id="section-undefined"
+    style="--sb-bg-color: var(--sb-color-surface); --sb-text-color: var(--sb-color-text); --sb-sc-padding: var(--sb-space-section); --sb-sc-view-mode: stacked;"
+  >
+    <div
+      class="sb-schedule-container"
+    >
+      <h2
+        class="sb-schedule-title"
+      >
+        Schedule
+      </h2>
+      <div
+        class="sb-schedule-view-mode-toggle"
+      >
+        <button
+          aria-pressed="true"
+          class="sb-schedule-toggle-button active"
+        >
+          Week View
+        </button>
+        <button
+          aria-pressed="false"
+          class="sb-schedule-toggle-button "
+        >
+          Day View
+        </button>
+      </div>
+      <div
+        class="sb-schedule-grid"
+        data-view-mode="stacked"
+      >
+        <div
+          class="sb-schedule-day-section"
+        >
+          <h3
+            class="sb-schedule-day-header"
+          >
+            Sat Sep 13 (Today)
+          </h3>
+          <ul
+            class="sb-schedule-list"
+          >
+            <li
+              class="sb-schedule-item"
+            >
+              <div
+                class="sb-schedule-item-content"
+              >
+                <h4
+                  class="sb-schedule-item-title"
+                >
+                  Class A
+                </h4>
+                <p
+                  class="sb-schedule-item-time"
+                >
+                  9:00 AM
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div
+          class="sb-schedule-day-section"
+        >
+          <h3
+            class="sb-schedule-day-header"
+          >
+            Sun Sep 14
+          </h3>
+          <ul
+            class="sb-schedule-list"
+          >
+            <li
+              class="sb-schedule-item"
+            >
+              <div
+                class="sb-schedule-item-content"
+              >
+                <h4
+                  class="sb-schedule-item-title"
+                >
+                  Class B
+                </h4>
+                <p
+                  class="sb-schedule-item-time"
+                >
+                  10:00 AM
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</DocumentFragment>
+`;

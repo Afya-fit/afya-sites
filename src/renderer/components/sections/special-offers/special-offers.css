@@ -1,0 +1,140 @@
+/**
+ * SpecialOffers Section Styles - Namespaced CSS
+ *
+ * @version 1.0 - One-Path Styling Framework (Namespaced)
+ */
+
+/* ===== SPECIAL OFFERS CONTAINER ===== */
+.sb-root .sb-special-offers-section {
+  background-color: var(--sb-bg-color, var(--sb-color-surface));
+  color: var(--sb-text-color, var(--sb-color-text));
+  padding: var(--sb-section-spacing-y, var(--sb-space-7)) var(--sb-content-padding-x, var(--sb-space-4));
+}
+
+.sb-root .sb-special-offers-container {
+  max-width: var(--sb-container-max-width, 1200px);
+  margin: 0 auto;
+}
+
+/* ===== SECTION TITLE ===== */
+.sb-root .sb-special-offers-title {
+  margin: 0 0 var(--sb-space-5, 48px) 0;
+  font-family: var(--sb-font-heading);
+  font-size: var(--sb-fs-h2);
+  line-height: var(--sb-line-height-heading);
+  color: var(--sb-special-offers-title-color, var(--sb-color-text));
+  text-align: center;
+}
+
+/* ===== OFFERS GRID ===== */
+.sb-root .sb-special-offers-grid {
+  display: grid;
+  gap: var(--sb-space-4, 32px);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  align-items: start;
+}
+
+/* ===== OFFER CARD ===== */
+.sb-root .sb-special-offers-card {
+  background: var(--sb-card-bg, var(--sb-color-surface-alt));
+  border: 1px solid var(--sb-card-border-color, var(--sb-color-border));
+  border-radius: var(--sb-card-radius, var(--sb-radius-2));
+  padding: var(--sb-space-4, 32px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sb-space-3, 24px);
+  height: 100%;
+  transition: all 0.2s ease;
+}
+
+.sb-root .sb-special-offers-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sb-shadow-3);
+  border-color: var(--sb-card-hover-border-color, var(--sb-color-brand));
+}
+
+/* ===== OFFER CONTENT ===== */
+.sb-root .sb-special-offers-card-title {
+  margin: 0;
+  font-family: var(--sb-font-heading);
+  font-size: var(--sb-fs-h3);
+  line-height: var(--sb-line-height-heading);
+  color: var(--sb-card-title-color, var(--sb-color-brand));
+  font-weight: 700;
+}
+
+.sb-root .sb-special-offers-card-description {
+  margin: 0;
+  font-family: var(--sb-font-body);
+  font-size: var(--sb-fs-body);
+  line-height: var(--sb-line-height-body);
+  color: var(--sb-card-description-color, var(--sb-color-text));
+  opacity: 0.9;
+  flex-grow: 1; /* Push price and CTA to bottom */
+}
+
+.sb-root .sb-special-offers-card-price {
+  margin: 0;
+  font-family: var(--sb-font-heading);
+  font-size: var(--sb-fs-h3);
+  font-weight: 700;
+  color: var(--sb-card-price-color, var(--sb-color-brand));
+  text-align: center;
+  padding: var(--sb-space-2, 16px);
+  background: var(--sb-color-surface);
+  border-radius: var(--sb-radius-1);
+  border: 1px solid var(--sb-color-border);
+}
+
+/* ===== CTA BUTTON ===== */
+.sb-root .sb-special-offers-cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sb-space-3, 24px) var(--sb-space-4, 32px);
+  background: var(--sb-color-brand);
+  color: var(--sb-color-brand-contrast);
+  border: none;
+  border-radius: var(--sb-radius-2);
+  font-family: var(--sb-font-heading);
+  font-size: var(--sb-fs-body);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.sb-root .sb-special-offers-cta-button:hover,
+.sb-root .sb-special-offers-cta-button:focus {
+  background: var(--sb-color-brand-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--sb-shadow-2);
+}
+
+.sb-root .sb-special-offers-cta-button:focus {
+  outline: 2px solid var(--sb-color-brand);
+  outline-offset: 2px;
+}
+
+.sb-root .sb-special-offers-cta-button:active {
+  transform: translateY(0);
+  box-shadow: var(--sb-shadow-1);
+}
+
+/* ===== RESPONSIVE BEHAVIOR ===== */
+@media (max-width: 768px) {
+  .sb-root .sb-special-offers-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== EMPTY STATE ===== */
+.sb-root .sb-special-offers-empty-state {
+  text-align: center;
+  padding: var(--sb-space-6, 64px);
+  color: var(--sb-color-text);
+  opacity: 0.6;
+  font-style: italic;
+  grid-column: 1 / -1; /* Span full width if grid is empty */
+}

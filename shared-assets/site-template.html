@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{SITE_TITLE}}</title>
+  <link rel="stylesheet" href="{{RENDERER_CSS_URL}}">
+  <style>
+    /* Reset for clean rendering */
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; }
+  </style>
+</head>
+<body>
+  <div id="root" class="sb-root">
+    {{STATIC_CONTENT}}
+  </div>
+  
+  <script>
+    // Site configuration for client-side rendering
+    window.__SITE_CONFIG__ = {{SITE_CONFIG_JSON}};
+  </script>
+  <script src="{{RENDERER_JS_URL}}"></script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+/**
+ * LinksPage Section Styles - Namespaced CSS
+ *
+ * @version 1.0 - One-Path Styling Framework (Namespaced)
+ */
+
+/* ===== LINKS PAGE CONTAINER ===== */
+.sb-root .sb-links-page-section {
+  background-color: var(--sb-bg-color, var(--sb-color-surface));
+  color: var(--sb-text-color, var(--sb-color-text));
+  padding: var(--sb-section-spacing-y, var(--sb-space-7)) var(--sb-content-padding-x, var(--sb-space-4));
+  text-align: center;
+}
+
+.sb-root .sb-links-page-container {
+  max-width: var(--sb-links-max-width, 680px);
+  margin: 0 auto;
+}
+
+/* ===== VARIANT, ALIGN, SIZE, COLUMNS ===== */
+.sb-root .sb-links-page-container[data-align="left"] {
+  text-align: left;
+}
+
+.sb-root .sb-links-page-container[data-align="center"] {
+  text-align: center;
+}
+
+.sb-root .sb-links-page-container[data-size="sm"] .sb-links-page-link {
+  padding: var(--sb-space-2, 16px) var(--sb-space-3, 24px);
+  font-size: var(--sb-fs-small);
+}
+
+.sb-root .sb-links-page-container[data-size="lg"] .sb-links-page-link {
+  padding: var(--sb-space-4, 32px) var(--sb-space-5, 40px);
+}
+
+.sb-root .sb-links-page-container[data-columns="two"] .sb-links-page-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Pill vs List variants */
+.sb-root .sb-links-page-container[data-variant="pill"] .sb-links-page-link {
+  border-radius: 9999px; /* clear pill shape */
+}
+
+.sb-root .sb-links-page-container[data-variant="list"] .sb-links-page-grid {
+  gap: 0; /* use separators instead of card gaps */
+}
+.sb-root .sb-links-page-container[data-variant="list"] .sb-links-page-link {
+  border: none;
+  border-radius: var(--sb-radius-1);
+  background: var(--sb-color-surface);
+  box-shadow: none;
+}
+.sb-root .sb-links-page-container[data-variant="list"] .sb-links-page-grid > div:not(:last-child) .sb-links-page-link {
+  border-bottom: 1px solid var(--sb-color-border);
+}
+
+/* Color modes */
+.sb-root .sb-links-page-container[data-color-mode="brand"] .sb-links-page-link {
+  background: var(--sb-color-brand-weak, var(--sb-color-surface-alt));
+  border-color: var(--sb-color-brand, currentColor);
+}
+
+/* Hover styles */
+.sb-root .sb-links-page-container[data-hover="underline"] .sb-links-page-link:hover {
+  text-decoration: underline;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Truncation */
+.sb-root .sb-links-page-container[data-truncate="1"] .sb-links-page-link {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sb-root .sb-links-page-container[data-truncate="2"] .sb-links-page-link {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ===== SECTION TITLE ===== */
+.sb-root .sb-links-page-title {
+  margin: 0 0 var(--sb-space-5, 48px) 0;
+  font-family: var(--sb-font-heading);
+  font-size: var(--sb-fs-h2);
+  line-height: var(--sb-line-height-heading);
+  font-weight: var(--sb-font-weight-bold, 700);
+  color: var(--sb-links-page-title-color, var(--sb-color-text));
+}
+
+/* ===== LINKS GRID ===== */
+.sb-root .sb-links-page-grid {
+  display: grid;
+  gap: var(--sb-space-3, 24px);
+}
+
+/* ===== INDIVIDUAL LINK ===== */
+.sb-root .sb-links-page-link {
+  display: block;
+  padding: var(--sb-space-3, 24px) var(--sb-space-4, 32px);
+  border: 1px solid var(--sb-link-border-color, var(--sb-color-border));
+  border-radius: var(--sb-link-radius, var(--sb-radius-2));
+  background: var(--sb-link-bg, var(--sb-color-surface));
+  color: var(--sb-link-color, var(--sb-color-text));
+  text-decoration: none;
+  font-family: var(--sb-font-body);
+  font-size: var(--sb-fs-body);
+  font-weight: 500;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.sb-root .sb-links-page-link .sb-links-page-link-icon {
+  display: inline-flex;
+  margin-right: var(--sb-space-2, 16px);
+  vertical-align: middle;
+}
+
+.sb-root .sb-links-page-link .sb-links-page-link-icon-top {
+  display: block;
+  margin: 0 auto var(--sb-space-2, 16px) auto;
+}
+
+.sb-root .sb-links-page-link .sb-links-page-link-label {
+  vertical-align: middle;
+}
+
+.sb-root .sb-links-page-link:hover,
+.sb-root .sb-links-page-link:focus {
+  background: var(--sb-link-hover-bg, var(--sb-color-surface-alt));
+  border-color: var(--sb-link-hover-border-color, var(--sb-color-brand));
+  transform: translateY(-2px);
+  box-shadow: var(--sb-shadow-2);
+}
+
+.sb-root .sb-links-page-link:focus {
+  outline: 2px solid var(--sb-color-brand);
+  outline-offset: 2px;
+}
+
+.sb-root .sb-links-page-link:active {
+  transform: translateY(0);
+  box-shadow: var(--sb-shadow-1);
+}
+
+/* ===== BRAND EMPHASIS ===== */
+.sb-root .sb-links-page-link[data-brand-emphasis="true"] {
+  background: var(--sb-color-brand);
+  color: var(--sb-color-on-brand, #fff);
+  border-color: var(--sb-color-brand);
+}
+
+.sb-root .sb-links-page-link[data-brand-emphasis="true"]:hover,
+.sb-root .sb-links-page-link[data-brand-emphasis="true"]:focus {
+  background: var(--sb-color-brand-hover);
+  border-color: var(--sb-color-brand-hover);
+  color: var(--sb-color-on-brand, #fff);
+}
+
+/* ===== EMPTY STATE ===== */
+.sb-root .sb-links-page-empty-state {
+  padding: var(--sb-space-6, 64px);
+  color: var(--sb-color-text);
+  opacity: 0.6;
+  font-style: italic;
+}
+
+/* ===== RESPONSIVE BEHAVIOR ===== */
+@media (max-width: 768px) {
+  .sb-root .sb-links-page-section {
+    padding: var(--sb-section-spacing-y-mobile, var(--sb-space-5)) var(--sb-content-padding-x-mobile, var(--sb-space-3));
+  }
+  .sb-root .sb-links-page-grid {
+    gap: var(--sb-space-2, 16px);
+  }
+  .sb-root .sb-links-page-link {
+    padding: var(--sb-space-3, 24px);
+  }
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+  .sb-root .sb-links-page-link {
+    transition: none;
+  }
+  .sb-root .sb-links-page-link:hover,
+  .sb-root .sb-links-page-link:focus,
+  .sb-root .sb-links-page-link:active {
+    transform: none;
+  }
+}
+
+/* ===== EMPHASIS OVERRIDE (place last to win) ===== */
+.sb-root .sb-links-page-container .sb-links-page-link[data-brand-emphasis="true"] {
+  background: var(--sb-color-brand);
+  color: var(--sb-color-on-brand, #fff);
+  border-color: var(--sb-color-brand);
+}
+.sb-root .sb-links-page-container .sb-links-page-link[data-brand-emphasis="true"]:hover,
+.sb-root .sb-links-page-container .sb-links-page-link[data-brand-emphasis="true"]:focus {
+  background: var(--sb-color-brand-hover);
+  color: var(--sb-color-on-brand, #fff);
+  border-color: var(--sb-color-brand-hover);
+}

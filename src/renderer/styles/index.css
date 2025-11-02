@@ -1,0 +1,42 @@
+/**
+ * Afya Sites - Main Stylesheet
+ * 
+ * One-Path Styling Framework Entry Point
+ * All CSS is namespaced under .sb-root to prevent conflicts.
+ * 
+ * @version 1.0 - Namespaced CSS
+ */
+
+/* ===== FONTS ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Lora:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Oswald:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@400;700&display=swap');
+
+/* ===== THEME FONT SCOPE (preempt global app styles) ===== */
+.sb-root {
+  font-family: var(--sb-font-body);
+}
+.sb-root h1, .sb-root h2, .sb-root h3, .sb-root .sb-heading {
+  font-family: var(--sb-font-heading);
+}
+
+/* ===== FOUNDATION (Tokens) ===== */
+@import "../theme/tokens.css";
+
+/* ===== UTILITIES ===== */
+@import "../utils/media.css";
+
+/* ===== SECTION COMPONENTS ===== */
+@import "../components/sections/business-data/business-data.css";
+@import "../components/sections/hero/hero.css";
+@import "../components/sections/content-block/content-block.css";
+@import "../components/sections/links-page/links-page.css";
+@import "../components/sections/schedule/schedule.css";
+@import "../components/sections/special-offers/special-offers.css";
+
+/* NOTE: Additional sections will be added as they're converted */
+/* @import "../components/sections/special-offers/special-offers.css"; */
+/* @import "../components/sections/links-page/links-page.css"; */
+/* @import "../components/sections/schedule/schedule.css"; */

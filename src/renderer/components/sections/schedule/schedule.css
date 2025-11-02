@@ -1,0 +1,175 @@
+/**
+ * Schedule Section Styles - Namespaced CSS
+ *
+ * @version 1.0 - One-Path Styling Framework (Namespaced)
+ */
+
+/* ===== SCHEDULE CONTAINER ===== */
+.sb-root .sb-schedule-section {
+  background-color: var(--sb-bg-color, var(--sb-color-surface));
+  color: var(--sb-text-color, var(--sb-color-text));
+  padding: var(--sb-section-spacing-y, var(--sb-space-7)) var(--sb-content-padding-x, var(--sb-space-4));
+}
+
+.sb-root .sb-schedule-container {
+  max-width: var(--sb-container-max-width, 1000px);
+  margin: 0 auto;
+}
+
+/* ===== SECTION TITLE ===== */
+.sb-root .sb-schedule-title {
+  margin: 0 0 var(--sb-space-5, 48px) 0;
+  font-family: var(--sb-font-heading);
+  font-size: var(--sb-fs-h2);
+  line-height: var(--sb-line-height-heading);
+  color: var(--sb-schedule-title-color, var(--sb-color-text));
+  text-align: center;
+}
+
+/* ===== VIEW MODE TOGGLE ===== */
+/* Removed - Single day view only */
+
+/* ===== DAY SELECTOR ===== */
+.sb-root .sb-schedule-day-selector {
+  display: flex;
+  gap: var(--sb-space-1, 8px);
+  justify-content: center;
+  margin-bottom: var(--sb-space-4, 32px);
+  overflow-x: auto;
+  padding: var(--sb-space-2, 16px) 0;
+}
+
+.sb-root .sb-schedule-day-button {
+  min-width: 80px;
+  padding: var(--sb-space-2, 16px);
+  border: 1px solid var(--sb-color-border);
+  border-radius: var(--sb-radius-1);
+  background: var(--sb-color-surface);
+  color: var(--sb-color-text);
+  font-family: var(--sb-font-body);
+  font-size: var(--sb-fs-small);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.sb-root .sb-schedule-day-button:hover {
+  background: var(--sb-color-surface-alt);
+  border-color: var(--sb-color-brand);
+}
+
+.sb-root .sb-schedule-day-button.selected {
+  background: var(--sb-color-brand);
+  color: var(--sb-color-brand-contrast);
+  border-color: var(--sb-color-brand);
+}
+
+.sb-root .sb-schedule-day-button.today {
+  font-weight: 600;
+}
+
+/* ===== SCHEDULE CONTENT ===== */
+/* Removed grid - Single day list view only */
+
+/* ===== DAY SECTION ===== */
+.sb-root .sb-schedule-day-section {
+  background: var(--sb-color-surface-alt);
+  border-radius: var(--sb-radius-2);
+  padding: var(--sb-space-4, 32px);
+  border: 1px solid var(--sb-color-border);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.sb-root .sb-schedule-day-header {
+  margin: 0 0 var(--sb-space-3, 24px) 0;
+  font-family: var(--sb-font-heading);
+  font-size: var(--sb-fs-h3);
+  color: var(--sb-color-brand);
+  text-align: center;
+  border-bottom: 1px solid var(--sb-color-border);
+  padding-bottom: var(--sb-space-2, 16px);
+}
+
+/* ===== SCHEDULE ITEMS ===== */
+.sb-root .sb-schedule-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--sb-space-2, 16px);
+}
+
+.sb-root .sb-schedule-item {
+  background: var(--sb-color-surface);
+  border: 1px solid var(--sb-color-border);
+  border-radius: var(--sb-radius-1);
+  padding: var(--sb-space-3, 24px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sb-space-2, 16px);
+}
+
+.sb-root .sb-schedule-item-content {
+  flex-grow: 1;
+}
+
+.sb-root .sb-schedule-item-title {
+  margin: 0 0 var(--sb-space-1, 8px) 0;
+  font-family: var(--sb-font-heading);
+  font-size: var(--sb-fs-body);
+  font-weight: 600;
+  color: var(--sb-color-text);
+}
+
+.sb-root .sb-schedule-item-time {
+  margin: 0;
+  font-family: var(--sb-font-body);
+  font-size: var(--sb-fs-small);
+  color: var(--sb-color-text);
+  opacity: 0.8;
+}
+
+.sb-root .sb-schedule-item-capacity {
+  font-family: var(--sb-font-body);
+  font-size: var(--sb-fs-small);
+  color: var(--sb-color-accent);
+  background: var(--sb-color-surface-alt);
+  padding: var(--sb-space-1, 8px) var(--sb-space-2, 16px);
+  border-radius: var(--sb-radius-pill);
+  border: 1px solid var(--sb-color-border);
+  white-space: nowrap;
+}
+
+/* ===== RESPONSIVE BEHAVIOR ===== */
+@media (max-width: 768px) {
+  .sb-root .sb-schedule-section {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .sb-root .sb-schedule-day-selector {
+    justify-content: flex-start;
+    padding: 0 var(--sb-content-padding-x-mobile, var(--sb-space-3));
+  }
+  .sb-root .sb-schedule-day-section {
+    margin: 0 var(--sb-space-3);
+    max-width: none;
+  }
+  .sb-root .sb-schedule-item {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+/* ===== EMPTY STATE ===== */
+.sb-root .sb-schedule-empty-state,
+.sb-root .sb-schedule-empty-day {
+  text-align: center;
+  padding: var(--sb-space-6, 64px);
+  color: var(--sb-color-text);
+  opacity: 0.6;
+  font-style: italic;
+}

@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LinksPage renders links with tokenized styles 1`] = `
+<DocumentFragment>
+  <section
+    aria-label="Links: Quick Links"
+    class="sb-links-page-section"
+    data-sb-section="links_page"
+    id="section-undefined"
+    style="--sb-bg-color: var(--sb-color-surface); --sb-text-color: var(--sb-color-text); --sb-lp-padding: var(--sb-space-section); --sb-lp-max-width: 600px;"
+  >
+    <div
+      class="sb-links-page-container"
+      data-align="center"
+      data-color-mode="neutral"
+      data-columns="auto"
+      data-hover="tint"
+      data-size="md"
+      data-variant="pill"
+    >
+      <h2
+        class="sb-links-page-title"
+      >
+        Quick Links
+      </h2>
+      <div
+        class="sb-links-page-grid"
+        role="list"
+      >
+        <div
+          role="listitem"
+        >
+          <a
+            class="sb-links-page-link"
+            data-brand-emphasis="false"
+            href="#book"
+          >
+            <span
+              class="sb-links-page-link-label"
+            >
+              Book
+            </span>
+          </a>
+        </div>
+        <div
+          role="listitem"
+        >
+          <a
+            class="sb-links-page-link"
+            data-brand-emphasis="false"
+            href="#contact"
+          >
+            <span
+              class="sb-links-page-link-label"
+            >
+              Contact
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</DocumentFragment>
+`;

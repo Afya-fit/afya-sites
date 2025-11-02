@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContentBlock renders title, body and media 1`] = `
+<DocumentFragment>
+  <section
+    aria-label="Content: Small-group training"
+    class="sb-content-block"
+    data-background="surface"
+    data-sb-section="content_block"
+    id="section-undefined"
+    style="--sb-cb-layout: media_top; --sb-cb-grid: 1fr; --sb-cb-media-order: 1; --sb-cb-text-order: 2; --sb-bg-color: var(--sb-color-surface); --sb-text-color: var(--sb-color-text); --sb-cb-media-count: 1;"
+  >
+    <div
+      class="sb-content-block-container"
+    >
+      <div
+        class="sb-content-block-layout"
+        data-layout="media_top"
+      >
+        <div
+          class="sb-content-block-media"
+        >
+          <div
+            class="sb-content-block-single-media"
+          >
+            <figure
+              class="sb-content-block-media-figure "
+            >
+              <div
+                style="position: relative; width: 100%; height: auto; overflow: hidden; background: transparent;"
+              >
+                <img
+                  alt="Alt"
+                  decoding="async"
+                  loading="lazy"
+                  src="https://example.com/img.jpg"
+                  style="width: 100%; height: 100%; object-fit: contain;"
+                />
+              </div>
+            </figure>
+          </div>
+        </div>
+        <div
+          class="sb-content-block-text-container"
+        >
+          <div
+            class="sb-content-block-text"
+            data-align="left"
+          >
+            <h2
+              class="sb-content-block-title"
+            >
+              Small-group training
+            </h2>
+            <div
+              class="sb-content-block-body"
+            >
+              Build strength and community
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</DocumentFragment>
+`;

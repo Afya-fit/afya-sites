@@ -1,0 +1,191 @@
+/**
+ * BusinessData Section Styles - CSS Module
+ * 
+ * Minimal implementation using One-Path Styling Framework.
+ * Displays business information in a clean, accessible format.
+ * 
+ * @version 1.0 - One-Path Styling Framework
+ */
+
+/* ===== BUSINESS DATA CONTAINER ===== */
+
+.sb-root .sb-business-data-section {
+  background-color: var(--sb-bg-color, var(--sb-color-surface));
+  color: var(--sb-text-color, var(--sb-color-text));
+  padding: var(--sb-space-section, 48px) 0;
+  border-bottom: 1px solid var(--sb-color-border);
+}
+
+.sb-root .sb-business-data-container {
+  max-width: var(--sb-container-max-width, 1000px);
+  margin: 0 auto;
+  padding: 0 var(--sb-space-4, 32px);
+}
+
+/* ===== SECTION TITLE ===== */
+
+.title {
+  margin: 0 0 var(--sb-space-4, 32px) 0;
+  font-family: var(--sb-font-heading, var(--sb-font-family-heading));
+  font-size: var(--sb-fs-h2);
+  line-height: var(--sb-lh-tight, 1.2);
+  color: var(--sb-text-color, var(--sb-color-text));
+}
+
+/* ===== CONTENT GRID ===== */
+
+.contentGrid {
+  display: grid;
+  gap: var(--sb-space-4, 32px);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .contentGrid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
+/* ===== BUSINESS INFO ===== */
+
+.businessInfo {
+  background: var(--sb-color-surface-alt, var(--sb-color-surface));
+  border-radius: var(--sb-radius-md, 12px);
+  padding: var(--sb-space-4, 32px);
+  border: 1px solid var(--sb-color-border);
+}
+
+.businessInfoTitle {
+  margin: 0 0 var(--sb-space-3, 24px) 0;
+  font-family: var(--sb-font-heading, var(--sb-font-family-heading));
+  font-size: var(--sb-fs-h3);
+  color: var(--sb-text-color, var(--sb-color-text));
+}
+
+.businessInfoList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--sb-space-2, 16px);
+}
+
+.businessInfoItem {
+  display: flex;
+  gap: var(--sb-space-2, 16px);
+  align-items: baseline;
+}
+
+.businessInfoLabel {
+  font-weight: 600;
+  color: var(--sb-text-color, var(--sb-color-text));
+  min-width: 80px;
+  flex-shrink: 0;
+}
+
+.businessInfoValue {
+  color: var(--sb-text-color, var(--sb-color-text));
+  opacity: 0.9;
+  word-break: break-word;
+}
+
+/* ===== PROGRAMS/PRODUCTS LISTS ===== */
+
+.dataSection {
+  background: var(--sb-color-surface-alt, var(--sb-color-surface));
+  border-radius: var(--sb-radius-md, 12px);
+  padding: var(--sb-space-4, 32px);
+  border: 1px solid var(--sb-color-border);
+}
+
+.dataSectionTitle {
+  margin: 0 0 var(--sb-space-3, 24px) 0;
+  font-family: var(--sb-font-heading, var(--sb-font-family-heading));
+  font-size: var(--sb-fs-h3);
+  color: var(--sb-text-color, var(--sb-color-text));
+}
+
+.dataList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--sb-space-1, 8px);
+}
+
+.dataListItem {
+  padding: var(--sb-space-2, 16px);
+  background: var(--sb-color-surface);
+  border-radius: var(--sb-radius-sm, 8px);
+  color: var(--sb-text-color, var(--sb-color-text));
+  opacity: 0.92;
+  border: 1px solid var(--sb-color-border);
+}
+
+/* ===== RESPONSIVE BEHAVIOR ===== */
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--sb-space-3, 24px);
+  }
+  
+  .businessInfo,
+  .dataSection {
+    padding: var(--sb-space-3, 24px);
+  }
+  
+  .businessInfoItem {
+    flex-direction: column;
+    gap: var(--sb-space-1, 8px);
+    align-items: flex-start;
+  }
+  
+  .businessInfoLabel {
+    min-width: auto;
+  }
+}
+
+/* ===== EMPTY STATE ===== */
+
+.emptyState {
+  text-align: center;
+  padding: var(--sb-space-6, 64px);
+  color: var(--sb-color-text);
+  opacity: 0.6;
+  font-style: italic;
+}
+
+/* ===== ACCESSIBILITY ===== */
+
+@media (prefers-contrast: high) {
+  .businessInfo,
+  .dataSection,
+  .dataListItem {
+    border-width: 2px;
+  }
+}
+
+/* ===== PRINT STYLES ===== */
+
+@media print {
+  .businessDataSection {
+    padding: var(--sb-space-3, 24px) 0;
+    border-bottom: 1px solid black;
+    background: white !important;
+    color: black !important;
+    break-inside: avoid;
+  }
+  
+  .businessInfo,
+  .dataSection {
+    border: 1px solid black;
+    break-inside: avoid;
+  }
+  
+  .businessInfoLabel,
+  .businessInfoValue,
+  .dataSectionTitle,
+  .dataListItem {
+    color: black !important;
+  }
+}

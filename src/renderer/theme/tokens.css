@@ -1,0 +1,148 @@
+/**
+ * Design Token Fallbacks - Lowest Priority Layer
+ * 
+ * These are the hardcoded default values that ensure nothing ever renders "undefined".
+ * They provide safe fallbacks when theme or section variables are not available.
+ * 
+ * Naming Convention: --sb-[token]-[size/variant]
+ * 
+ * @version 1.0 - One-Path Styling Framework
+ */
+
+:root {
+  /* ===== COLOR TOKENS ===== */
+  
+  /* Base colors - light mode defaults */
+  --sb-color-text: #1f2937;
+  --sb-color-surface: #ffffff;
+  --sb-color-surface-alt: #f7f7f8;
+  --sb-color-bg-alt: #f6f7f9;
+  --sb-color-border: rgba(0, 0, 0, 0.08);
+  
+  /* Brand colors - default blue palette */
+  --sb-color-brand: #2563eb;
+  --sb-color-brand-hover: #1d4ed8;
+  --sb-color-brand-contrast: #ffffff;
+  --sb-color-accent: #3b82f6;
+  --sb-color-neutral: #6b7280;
+  
+  /* ===== TYPOGRAPHY TOKENS ===== */
+  
+  /* Font families - system fonts for performance */
+  --sb-font-heading: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+  --sb-font-body: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+  
+  /* Display typography - for titles, headings, hero text (attention-grabbing) */
+  --sb-fs-display: clamp(32px, 6vw, 64px);
+  --sb-fs-hero: clamp(48px, 8vw, 72px);
+  --sb-fs-h1: clamp(28px, 5.5vw, 48px);
+  --sb-fs-h2: clamp(24px, 5vw, 36px);
+  --sb-fs-h3: clamp(20px, 4.5vw, 28px);
+  
+  /* Text typography - for body text, descriptions, UI (reading-optimized) */
+  --sb-fs-body: clamp(16px, 3.5vw, 18px);
+  --sb-fs-title: clamp(20px, 3.2vw, 28px);
+  --sb-fs-subtitle: clamp(18px, 4vw, 22px);
+  --sb-fs-small: clamp(14px, 3vw, 16px);
+  
+  /* Line heights */
+  --sb-lh-tight: 1.12;
+  --sb-lh-normal: 1.4;
+  --sb-lh-relaxed: 1.6;
+  --sb-line-height-heading: 1.2;
+  --sb-line-height-body: 1.6;
+  
+  /* ===== SPACING TOKENS ===== */
+  
+  /* Spacing scale */
+  --sb-space-1: 8px;
+  --sb-space-2: 16px;
+  --sb-space-3: 24px;
+  --sb-space-4: 32px;
+  --sb-space-5: 48px;
+  --sb-space-6: 64px;
+  --sb-space-7: 96px;
+  --sb-space-8: 128px;
+  
+  /* Section spacing */
+  --sb-space-section: 48px;
+  --sb-space-section-mobile: 32px;
+  
+  /* ===== LAYOUT TOKENS ===== */
+  
+  /* Border radius */
+  --sb-radius-sm: 6px;
+  --sb-radius-md: 12px;
+  --sb-radius-lg: 16px;
+  --sb-radius-xl: 24px;
+  --sb-radius-pill: 999px;
+  
+  /* Shadows */
+  --sb-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --sb-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.14);
+  --sb-shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.18);
+  
+  /* Content measures */
+  --sb-measure: 65ch;
+  --sb-measure-wide: 75ch;
+  --sb-measure-narrow: 45ch;
+  
+  /* ===== COMPONENT TOKENS ===== */
+  
+  /* Button defaults */
+  --sb-btn-padding: 12px 24px;
+  --sb-btn-radius: var(--sb-radius-md);
+  --sb-btn-font-weight: 500;
+  
+  /* Input defaults */
+  --sb-input-padding: 12px 16px;
+  --sb-input-radius: var(--sb-radius-sm);
+  --sb-input-border: 1px solid var(--sb-color-border);
+  
+  /* ===== ANIMATION TOKENS ===== */
+  
+  /* Transitions */
+  --sb-transition-fast: 150ms ease-out;
+  --sb-transition-normal: 250ms ease-out;
+  --sb-transition-slow: 400ms ease-out;
+  
+  /* ===== Z-INDEX TOKENS ===== */
+  
+  --sb-z-overlay: 100;
+  --sb-z-modal: 200;
+  --sb-z-tooltip: 300;
+}
+
+/* ===== RESPONSIVE OVERRIDES ===== */
+
+@media (max-width: 768px) {
+  :root {
+    /* Adjust spacing for mobile */
+    --sb-space-section: var(--sb-space-section-mobile);
+    
+    /* Ensure minimum touch targets */
+    --sb-btn-padding: 14px 20px;
+    --sb-input-padding: 14px 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    /* Respect user motion preferences */
+    --sb-transition-fast: 0ms;
+    --sb-transition-normal: 0ms;
+    --sb-transition-slow: 0ms;
+  }
+}
+
+/* ===== ACCESSIBILITY TOKENS ===== */
+
+@media (prefers-contrast: high) {
+  :root {
+    /* Increase contrast for accessibility */
+    --sb-color-border: rgba(0, 0, 0, 0.2);
+    --sb-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2);
+    --sb-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.25);
+    --sb-shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.3);
+  }
+}

@@ -1,0 +1,242 @@
+/**
+ * BusinessData Section Styles - Namespaced CSS
+ * 
+ * Minimal implementation using One-Path Styling Framework.
+ * Displays business information in a clean, accessible format.
+ * 
+ * @version 1.0 - One-Path Styling Framework (Namespaced)
+ */
+
+/* ===== BUSINESS DATA CONTAINER ===== */
+
+.sb-root .sb-business-data-section {
+  background-color: var(--sb-bg-color, var(--sb-color-surface));
+  color: var(--sb-text-color, var(--sb-color-text));
+  padding: var(--sb-space-section, 48px) 0;
+  border-bottom: 1px solid var(--sb-color-border);
+}
+
+.sb-root .sb-business-data-container {
+  max-width: var(--sb-container-max-width, 1000px);
+  margin: 0 auto;
+  padding: 0 var(--sb-space-4, 32px);
+}
+
+/* ===== SECTION TITLE ===== */
+
+.sb-root .sb-business-data-title {
+  margin: 0 0 var(--sb-space-4, 32px) 0;
+  font-family: var(--sb-font-heading, var(--sb-font-family-heading));
+  font-size: var(--sb-business-title-fs, var(--sb-fs-h2));
+  line-height: var(--sb-business-title-lh, var(--sb-line-height-heading));
+  font-weight: var(--sb-font-weight-bold, 700);
+  color: var(--sb-business-title-color, var(--sb-color-text));
+}
+
+/* ===== CONTENT GRID ===== */
+
+.sb-root .sb-business-data-content-grid {
+  display: grid;
+  gap: var(--sb-space-6, 64px);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .sb-root .sb-business-data-content-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ===== BUSINESS INFO SECTION ===== */
+
+.sb-root .sb-business-data-info {
+  padding: var(--sb-space-4, 32px);
+  background: var(--sb-card-bg, var(--sb-color-surface-alt));
+  border-radius: var(--sb-radius-2, 8px);
+  border: 1px solid var(--sb-color-border);
+}
+
+.sb-root .sb-business-data-info-title {
+  margin: 0 0 var(--sb-space-3, 24px) 0;
+  font-family: var(--sb-font-heading, var(--sb-font-family-heading));
+  font-size: var(--sb-business-info-title-fs, var(--sb-fs-h3));
+  font-weight: var(--sb-font-weight-semibold, 600);
+  color: var(--sb-business-info-title-color, var(--sb-color-text));
+}
+
+/* ===== LOCATION ACTIONS (compact buttons) ===== */
+.sb-root .sb-business-actions {
+  display: flex;
+  gap: var(--sb-space-2, 16px);
+  flex-wrap: wrap;
+}
+
+.sb-root .sb-business-action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sb-space-1, 8px);
+  padding: 6px 10px;
+  border: 1px solid var(--sb-color-border);
+  border-radius: var(--sb-radius-1, 4px);
+  background: var(--sb-color-surface);
+  color: var(--sb-color-text);
+  text-decoration: none;
+  font-size: var(--sb-fs-small);
+  line-height: 1;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.sb-root .sb-business-action:hover,
+.sb-root .sb-business-action:focus {
+  background: var(--sb-color-surface-alt);
+  border-color: var(--sb-color-brand);
+}
+
+.sb-root .sb-business-action-icon {
+  --sb-icon-size: 18px;
+}
+
+.sb-root .sb-business-data-info-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sb-space-2, 16px);
+}
+
+.sb-root .sb-business-data-info-item {
+  display: flex;
+  gap: var(--sb-space-2, 16px);
+  align-items: flex-start;
+}
+
+.sb-root .sb-business-data-info-label {
+  flex: 0 0 auto;
+  font-weight: var(--sb-font-weight-medium, 500);
+  color: var(--sb-business-info-label-color, var(--sb-color-text));
+  min-width: 80px;
+}
+
+.sb-root .sb-business-data-info-value {
+  flex: 1;
+  color: var(--sb-business-info-value-color, var(--sb-color-text));
+  word-break: break-word;
+}
+
+/* ===== DATA SECTIONS (Programs, Products, etc.) ===== */
+
+.sb-root .sb-business-data-section-item {
+  padding: var(--sb-space-4, 32px);
+  background: var(--sb-card-bg, var(--sb-color-surface-alt));
+  border-radius: var(--sb-radius-2, 8px);
+  border: 1px solid var(--sb-color-border);
+}
+
+.sb-root .sb-business-data-section-title {
+  margin: 0 0 var(--sb-space-3, 24px) 0;
+  font-family: var(--sb-font-heading, var(--sb-font-family-heading));
+  font-size: var(--sb-business-section-title-fs, var(--sb-fs-h3));
+  font-weight: var(--sb-font-weight-semibold, 600);
+  color: var(--sb-business-section-title-color, var(--sb-color-text));
+}
+
+.sb-root .sb-business-data-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sb-space-3, 24px);
+}
+
+.sb-root .sb-business-data-list-item {
+  padding: var(--sb-space-3, 24px);
+  background: var(--sb-list-item-bg, var(--sb-color-surface));
+  border-radius: var(--sb-radius-1, 4px);
+  border: 1px solid var(--sb-color-border);
+  transition: var(--sb-transition-hover, all 0.2s ease);
+}
+
+.sb-root .sb-business-data-list-item:hover {
+  background: var(--sb-list-item-hover-bg, var(--sb-color-surface-alt));
+  border-color: var(--sb-color-accent);
+}
+
+.sb-root .sb-business-data-list-item h4 {
+  margin: 0 0 var(--sb-space-1, 8px) 0;
+  font-family: var(--sb-font-heading, var(--sb-font-family-heading));
+  font-size: var(--sb-list-item-title-fs, var(--sb-fs-body));
+  font-weight: var(--sb-font-weight-medium, 500);
+  color: var(--sb-list-item-title-color, var(--sb-color-text));
+}
+
+.sb-root .sb-business-data-list-item p {
+  margin: 0;
+  font-size: var(--sb-list-item-text-fs, var(--sb-fs-small));
+  line-height: var(--sb-list-item-text-lh, var(--sb-line-height-body));
+  color: var(--sb-list-item-text-color, var(--sb-color-text));
+  opacity: 0.8;
+}
+
+/* ===== EMPTY STATE ===== */
+
+.sb-root .sb-business-data-empty-state {
+  text-align: center;
+  padding: var(--sb-space-6, 64px) var(--sb-space-4, 32px);
+  color: var(--sb-empty-state-color, var(--sb-color-text));
+  opacity: 0.6;
+}
+
+.sb-root .sb-business-data-empty-state p {
+  margin: 0;
+  font-size: var(--sb-empty-state-fs, var(--sb-fs-body));
+  line-height: var(--sb-empty-state-lh, var(--sb-line-height-body));
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+
+@media (max-width: 767px) {
+  .sb-root .sb-business-data-container {
+    padding: 0 var(--sb-space-3, 24px);
+  }
+  
+  .sb-root .sb-business-data-content-grid {
+    gap: var(--sb-space-4, 32px);
+  }
+  
+  .sb-root .sb-business-data-info,
+  .sb-root .sb-business-data-section-item {
+    padding: var(--sb-space-3, 24px);
+  }
+  
+  .sb-root .sb-business-data-info-item {
+    flex-direction: column;
+    gap: var(--sb-space-1, 8px);
+  }
+  
+  .sb-root .sb-business-data-info-label {
+    min-width: auto;
+  }
+}
+
+/* ===== BRAND EMPHASIS ===== */
+
+.sb-root .sb-business-data-title[data-brand-emphasis="true"],
+.sb-root .sb-business-data-info-title[data-brand-emphasis="true"],
+.sb-root .sb-business-data-section-title[data-brand-emphasis="true"] {
+  color: var(--sb-color-brand);
+}
+
+/* ===== ACCESSIBILITY ===== */
+
+.sb-root .sb-business-data-list-item:focus {
+  outline: 2px solid var(--sb-color-brand);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sb-root .sb-business-data-list-item {
+    transition: none;
+  }
+}

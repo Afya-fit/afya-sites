@@ -1,0 +1,266 @@
+/**
+ * Hero Section Styles - Namespaced CSS
+ * 
+ * Uses the One-Path Styling Framework with CSS custom properties.
+ * Variables are provided by SectionBox and theme layers.
+ * 
+ * @version 1.0 - One-Path Styling Framework (Namespaced)
+ */
+
+/* Import shared utilities */
+@import '../../../utils/media.css';
+
+/* ===== HERO CONTAINER ===== */
+
+.sb-root .sb-hero-section {
+  position: relative;
+  min-height: var(--sb-hero-min-height, clamp(250px, 50vh, 400px));
+  display: flex;
+  align-items: var(--sb-align-items, center);
+  justify-content: var(--sb-justify-content, center);
+  text-align: var(--sb-text-align, center);
+  
+  /* Background image support */
+  background-image: var(--sb-hero-bg-image, none);
+  background-size: var(--sb-hero-bg-size, cover);
+  background-position: var(--sb-hero-bg-position, center);
+  background-repeat: no-repeat;
+  
+  /* Text color and overlay */
+  color: var(--sb-hero-text-color, var(--sb-color-text));
+  padding: var(--sb-hero-padding, var(--sb-space-section, 48px)) 0;
+  overflow: hidden;
+}
+
+/* Variant: Bold hero with larger min-height */
+.sb-root .sb-hero-section[data-variant="bold"] {
+  min-height: var(--sb-hero-bold-min-height, clamp(350px, 70vh, 600px));
+}
+
+/* ===== OVERLAYS ===== */
+
+/* Background overlay for better text contrast */
+.sb-root .sb-hero-background-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--sb-hero-overlay, rgba(0, 0, 0, 0.3));
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Additional scrim overlay if needed */
+.sb-root .sb-hero-scrim-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--sb-hero-scrim, none);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ===== CONTENT CONTAINER ===== */
+
+.sb-root .sb-hero-content-container {
+  position: relative;
+  z-index: 3;
+  max-width: var(--sb-hero-content-max-width, var(--sb-container-max-width, 1000px));
+  margin: 0 auto;
+  padding: 0 var(--sb-space-4, 32px);
+  
+  /* Responsive content width */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sb-space-4, 32px);
+}
+
+/* Layout parity with ContentBlock */
+.sb-root .sb-hero-section[data-layout="media_left"] .sb-hero-content-container,
+.sb-root .sb-hero-section[data-layout="media_right"] .sb-hero-content-container {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  align-items: center;
+  gap: var(--sb-space-5, 40px);
+}
+
+.sb-root .sb-hero-section[data-layout="media_left"] .sb-hero-content-container .sb-hero-content-image { order: 0; }
+.sb-root .sb-hero-section[data-layout="media_left"] .sb-hero-content-container .sb-hero-text-content { order: 1; }
+
+.sb-root .sb-hero-section[data-layout="media_right"] .sb-hero-content-container .sb-hero-content-image { order: 1; }
+.sb-root .sb-hero-section[data-layout="media_right"] .sb-hero-content-container .sb-hero-text-content { order: 0; }
+
+.sb-root .sb-hero-section[data-layout="media_top"] .sb-hero-content-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.sb-root .sb-hero-section[data-layout="media_bottom"] .sb-hero-content-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.sb-root .sb-hero-section[data-layout="text_only"] .sb-hero-content-image { display: none; }
+
+/* Alignment variants */
+.sb-root .sb-hero-content-container[data-align="left"] {
+  margin-left: 0;
+  text-align: left;
+  align-items: flex-start;
+}
+
+.sb-root .sb-hero-content-container[data-align="right"] {
+  margin-right: 0;
+  text-align: right;
+  align-items: flex-end;
+}
+
+.sb-root .sb-hero-content-container[data-align="center"] {
+  margin: 0 auto;
+  text-align: center;
+  align-items: center;
+}
+
+/* ===== CONTENT IMAGE ===== */
+
+.sb-root .sb-hero-content-image {
+  max-width: var(--sb-hero-image-max-width, 200px);
+  margin: 0 0 var(--sb-space-3, 24px) 0; /* follow container alignment */
+}
+
+.sb-root .sb-hero-content-image-frame {
+  width: 100%;
+  max-width: 100%;
+}
+
+.sb-root .sb-hero-content-image-frame img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--sb-hero-image-radius, var(--sb-radius-2, 8px));
+}
+
+/* ===== TYPOGRAPHY ===== */
+
+.sb-root .sb-hero-title {
+  margin: 0;
+  font-family: var(--sb-font-heading);
+  font-size: calc(var(--sb-fs-hero) * var(--sb-title-mult, 1));
+  line-height: var(--sb-line-height-heading);
+  font-weight: var(--sb-font-weight-bold, 700);
+  color: inherit;
+  
+  /* Enhanced readability */
+  text-shadow: var(--sb-hero-title-shadow, var(--sb-shadow-1));
+  letter-spacing: var(--sb-hero-title-spacing, -0.02em);
+}
+
+.sb-root .sb-hero-subtitle {
+  margin: 0;
+  font-family: var(--sb-font-body);
+  font-size: calc(var(--sb-fs-subtitle) * var(--sb-subtitle-mult, 1) * var(--sb-text-mult, 1));
+  line-height: var(--sb-line-height-body);
+  font-weight: var(--sb-font-weight-normal, 400);
+  color: inherit;
+  opacity: var(--sb-hero-subtitle-opacity, 0.9);
+  
+  /* Enhanced readability */
+  text-shadow: var(--sb-hero-subtitle-shadow, var(--sb-shadow-1));
+}
+
+/* ===== BRAND EMPHASIS ===== */
+
+.sb-root .sb-hero-title[data-brand-emphasis="true"],
+.sb-root .sb-hero-subtitle[data-brand-emphasis="true"] {
+  color: var(--sb-color-brand);
+}
+
+/* ===== TEXT COLOR MODES ===== */
+
+.sb-root .sb-hero-content-container[data-text-mode="brand"] .sb-hero-title,
+.sb-root .sb-hero-content-container[data-text-mode="brand"] .sb-hero-subtitle {
+  color: var(--sb-color-brand);
+}
+
+.sb-root .sb-hero-content-container[data-text-mode="neutral"] .sb-hero-title,
+.sb-root .sb-hero-content-container[data-text-mode="neutral"] .sb-hero-subtitle {
+  color: var(--sb-color-text);
+}
+
+.sb-root .sb-hero-content-container[data-text-mode="auto"] .sb-hero-title,
+.sb-root .sb-hero-content-container[data-text-mode="auto"] .sb-hero-subtitle {
+  color: var(--sb-hero-auto-text-color, var(--sb-color-text));
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+@media (max-width: 768px) {
+  .sb-root .sb-hero-section {
+    min-height: var(--sb-hero-mobile-min-height, clamp(200px, 40vh, 300px));
+    padding: var(--sb-hero-mobile-padding, var(--sb-space-4, 32px)) 0;
+    background-position: var(--sb-hero-bg-position-mobile, var(--sb-hero-bg-position, center));
+  }
+  
+  .sb-root .sb-hero-section[data-variant="bold"] {
+    min-height: var(--sb-hero-bold-mobile-min-height, clamp(250px, 50vh, 400px));
+  }
+  
+  .sb-root .sb-hero-content-container {
+    padding: 0 var(--sb-space-3, 24px);
+    gap: var(--sb-space-3, 24px);
+  }
+  .sb-root .sb-hero-section[data-layout="media_left"] .sb-hero-content-container,
+  .sb-root .sb-hero-section[data-layout="media_right"] .sb-hero-content-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Use the same clamp() + multipliers on mobile by letting desktop rules cascade */
+  
+  .sb-root .sb-hero-content-image {
+    max-width: var(--sb-hero-image-mobile-max-width, 150px);
+  }
+}
+
+/* ===== ACCESSIBILITY ===== */
+
+@media (prefers-reduced-motion: reduce) {
+  .sb-root .sb-hero-section {
+    animation: none;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .sb-root .sb-hero-title,
+  .sb-root .sb-hero-subtitle {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  }
+}
+
+/* ===== DYNAMIC BACKGROUND SUPPORT ===== */
+
+.sb-root .sb-hero-section[data-has-bg="true"] {
+  background-image: var(--sb-hero-bg-image);
+}
+
+.sb-root .sb-hero-section[data-has-overlay="true"]::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--sb-hero-overlay);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ===== INTERACTIVE STATES ===== */
+
+.sb-root .sb-hero-section:focus-within {
+  outline: 2px solid var(--sb-color-brand);
+  outline-offset: 2px;
+}
