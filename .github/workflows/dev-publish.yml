@@ -1,0 +1,59 @@
+name: Development pipeline
+
+on:
+  push:
+    # Publish `master` as Docker `latest` image.
+    branches:
+      - develop
+
+env:
+  IMAGE_NAME: afya-sites
+  NEXT_PUBLIC_RELEASE: 'dev-${{ github.run_number }}'
+
+jobs:
+  # Push image to GitHub Packages.
+  # See also https://docs.docker.com/docker-hub/builds/
+  build:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build image
+        run: docker build . --file Dockerfile --tag $IMAGE_NAME
+
+      - name: Log in to registry
+        run: echo "${{ secrets.CR_PAT }}" | docker login ghcr.io -u $ --password-stdin
+
+      - name: Push image
+        run: |
+          IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME
+
+          # Change all uppercase to lowercase
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+
+          VERSION=$NEXT_PUBLIC_RELEASE
+
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$VERSION
+
+          docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
+          docker tag $IMAGE_NAME $IMAGE_ID:dev-latest
+          docker push $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:dev-latest
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+      - name: Dispatch workflow
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: Autodeploy to EKS
+          repo: Afya-fit/afya-kubernetes
+          token: ${{ secrets.CR_PAT }}
+          inputs: '{ "service": "sitebuilder", "version": "dev-${{ github.run_number }}", "environment": "dev" }'
+          ref: refs/heads/master
