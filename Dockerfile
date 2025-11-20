@@ -48,7 +48,7 @@ RUN chmod +x ./entrypoint.sh
 USER nextjs
 
 # Expose port
-EXPOSE 3001
+EXPOSE 3000
 
 # Start via entrypoint script (replaces placeholders with actual env vars)
 ENTRYPOINT ["./entrypoint.sh"]

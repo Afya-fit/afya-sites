@@ -17,7 +17,7 @@ find ./.next/ -type f -exec sed -i "s|!!NEXT_PUBLIC_API_URL!!|$NEXT_PUBLIC_API_U
 find ./.next/ -type f -exec sed -i "s|!!NEXT_PUBLIC_WS_URL!!|$NEXT_PUBLIC_WS_URL|g" {} +
 
 echo "✅ Environment variables replaced"
-echo "🌐 Starting Next.js server on port ${PORT:-3001}..."
+echo "🌐 Starting Next.js server on port ${PORT:-3000}..."
 
 # Start the Next.js server
 node server.js
