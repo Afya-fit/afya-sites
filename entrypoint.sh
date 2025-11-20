@@ -7,21 +7,14 @@
 echo "🚀 Starting Afya Sitebuilder..."
 echo "📝 Replacing environment variables..."
 
+# Replace NODE_ENV
+find ./.next/ -type f -exec sed -i "s|!!NODE_ENV!!|$NODE_ENV|g" {} +
+
 # Replace API URL
-if [ ! -z "$NEXT_PUBLIC_API_URL" ]; then
-  echo "   NEXT_PUBLIC_API_URL: $NEXT_PUBLIC_API_URL"
-  find ./.next/ -type f -exec sed -i "s|!!NEXT_PUBLIC_API_URL!!|$NEXT_PUBLIC_API_URL|g" {} +
-else
-  echo "   ⚠️  NEXT_PUBLIC_API_URL not set, using placeholder"
-fi
+find ./.next/ -type f -exec sed -i "s|!!NEXT_PUBLIC_API_URL!!|$NEXT_PUBLIC_API_URL|g" {} +
 
 # Replace WebSocket URL
-if [ ! -z "$NEXT_PUBLIC_WS_URL" ]; then
-  echo "   NEXT_PUBLIC_WS_URL: $NEXT_PUBLIC_WS_URL"
-  find ./.next/ -type f -exec sed -i "s|!!NEXT_PUBLIC_WS_URL!!|$NEXT_PUBLIC_WS_URL|g" {} +
-else
-  echo "   ⚠️  NEXT_PUBLIC_WS_URL not set, using placeholder"
-fi
+find ./.next/ -type f -exec sed -i "s|!!NEXT_PUBLIC_WS_URL!!|$NEXT_PUBLIC_WS_URL|g" {} +
 
 echo "✅ Environment variables replaced"
 echo "🌐 Starting Next.js server on port ${PORT:-3001}..."
