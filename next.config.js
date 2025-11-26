@@ -15,8 +15,8 @@ const nextConfig = {
   async rewrites() {
     // In development we proxy API/platform calls to a backend host.
     // Use NEXT_PUBLIC_API_URL as the single source of truth for the backend base URL.
+    const devBackendHost = process.env.NEXT_PUBLIC_API_URL
     if (process.env.NODE_ENV === 'development') {
-      const devBackendHost = process.env.NEXT_PUBLIC_API_URL
       return [
         {
           source: '/api/:path*',
