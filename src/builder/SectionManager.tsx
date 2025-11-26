@@ -12,7 +12,7 @@ import ImageLibrary from './ImageLibrary'
 import { ensureCsrfCookie, getCookie } from '../utils/api'
 
 export default function SectionManager() {
-  const { draft, view, addSection, removeSection, selectedIndex, setSelectedIndex, reorderSections, openImageManager, isPreviewMode } = useBuilder()
+  const { draft, view, addSection, removeSection, selectedIndex, setSelectedIndex, reorderSections, openImageManager, isPreviewMode, businessId } = useBuilder()
   const sections = draft?.sections || []
   const isViewingPublished = view === 'published'
   const isReadOnlyMode = isViewingPublished || isPreviewMode
@@ -155,7 +155,7 @@ export default function SectionManager() {
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: 16 }}>
               <strong>Media Library</strong>
             </div>
-            <InlineImageLibrary businessId="9bd00fb7-0f2b-495d-a65d-88681905e76e" />
+            <InlineImageLibrary businessId={businessId} />
           </div>
         )}
       </div>
