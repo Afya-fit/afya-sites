@@ -231,7 +231,7 @@ function PreviewControls() {
     try {
       // Encode the site configuration for URL passing
       const configParam = encodeURIComponent(JSON.stringify(draft));
-      const previewUrl = `/platform/sites/preview/${businessId}?config=${configParam}`;
+      const previewUrl = `/sitebuilder/sites/preview/${businessId}?config=${configParam}`;
       
       // Open in new tab - completely standalone
       window.open(previewUrl, '_blank', 'noopener,noreferrer');

@@ -219,7 +219,7 @@ export function BuilderProvider({ businessId, children }: Props) {
       } catch (localError) {
         console.error('❌ Critical: localStorage autosave failed:', localError)
       }
-    }, 600)
+    }, 2000) // 2 seconds debounce to avoid rate limiting during typing
     return () => clearTimeout(t)
   }, [businessId, slug, draft])
 
