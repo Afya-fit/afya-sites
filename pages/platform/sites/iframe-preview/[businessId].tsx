@@ -135,8 +135,8 @@ export default function IframePreview({ businessId, initialConfig, platformData 
           }}
         />
         
-        {/* Debug info in development */}
-      {process.env.NODE_ENV === 'development' && (
+        {/* Debug info only when explicitly enabled */}
+      {process.env.NEXT_PUBLIC_ENABLE_DEBUG === 'true' && (
         <div style={{
           position: 'fixed',
           bottom: 10,

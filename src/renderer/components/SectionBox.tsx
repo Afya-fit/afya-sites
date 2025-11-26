@@ -126,7 +126,7 @@ export function validateSectionVars(vars: Record<string, any>): vars is Record<s
  * Only runs in development mode to avoid production console spam
  */
 export function debugSectionVars(sectionType: string, vars: Record<string, any>): void {
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NEXT_PUBLIC_ENABLE_DEBUG === 'true') {
     console.group(`🎨 [SB] Section variables for ${sectionType}`);
     
     if (!vars || Object.keys(vars).length === 0) {

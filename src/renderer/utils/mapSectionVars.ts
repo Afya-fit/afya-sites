@@ -477,7 +477,7 @@ export function validateAndLogSectionVars(
   sectionType: string, 
   vars: Record<string, string>
 ): Record<string, string> {
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NEXT_PUBLIC_ENABLE_DEBUG === 'true') {
     const invalidVars = Object.keys(vars).filter(key => !key.startsWith('--sb-'));
     
     if (invalidVars.length > 0) {

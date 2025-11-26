@@ -7,9 +7,9 @@ const nextConfig = {
   output: 'standalone',
   
   // Standalone sitebuilder app configuration
-  // Allow overriding basePath for different deployments; default to /sitebuilder only in production
-  basePath: process.env.NEXT_PUBLIC_BASE_PATH ||
-    (process.env.NODE_ENV === 'production' ? '/sitebuilder' : ''),
+  // Base path is fully controlled by NEXT_PUBLIC_BASE_PATH so different Kubernetes
+  // environments (dev/prod) can share the same optimized build but different routing.
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
   
   // API proxy to backend (for development)
   async rewrites() {
