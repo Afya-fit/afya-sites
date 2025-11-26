@@ -141,9 +141,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     // Check access by attempting to fetch draft
     // The backend RBAC will handle permission checking
     // Use NEXT_PUBLIC_API_URL as the single source of truth for the backend base URL
-    // We use bracket notation to prevent Next.js from inlining the value at build time,
-    // forcing it to read the actual environment variable from the Kubernetes Pod at runtime.
-    const apiUrl = process.env['NEXT_PUBLIC_API_URL'] || 'http://localhost:8001'
+    // We use a helper to access process.env to prevent Next.js from inlining the value at build time.
+    const getEnv = (key: string) => process.env[key]
+    const apiUrl = getEnv('NEXT_PUBLIC_API_URL') || 'http://localhost:8001'
     
     console.log('[Sitebuilder Auth] Checking access for business:', id)
     console.log('[Sitebuilder Auth] Making API call to:', `${apiUrl}/sitebuilder/${id}/draft/`)
