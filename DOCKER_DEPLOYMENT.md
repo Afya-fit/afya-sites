@@ -24,17 +24,17 @@ docker build -t afya-sitebuilder:test .
 ### 2. Run Locally
 
 ```bash
-docker run -p 3001:3001 \
+docker run -p 3000:3000 \
   -e NODE_ENV=production \
-  -e NEXT_PUBLIC_API_HOST=http://localhost:8000 \
+  -e NEXT_PUBLIC_API_URL=https://your-api-host.example.com \
   afya-sitebuilder:test
 ```
 
 ### 3. Test the Application
 
 Open your browser to:
-- **Main App:** http://localhost:3001/sitebuilder
-- **Health Check:** http://localhost:3001/api/health (if implemented)
+- **Main App:** http://127.0.0.1:3000/sitebuilder
+- **Health Check:** http://127.0.0.1:3000/api/health (if implemented)
 
 ### 4. Verify Functionality
 
@@ -66,7 +66,7 @@ afya-sitebuilder
 | `NODE_ENV` | `production` | Node environment |
 | `PORT` | `3001` | Application port |
 | `HOSTNAME` | `0.0.0.0` | Bind address |
-| `NEXT_PUBLIC_API_HOST` | (optional) | Backend API URL override |
+| `NEXT_PUBLIC_API_URL` | (required) | Backend API base URL |
 
 ### Health Check
 
@@ -210,8 +210,8 @@ docker run -it afya-sitebuilder:test sh
 
 **Problem:** Cannot connect to backend API
 ```bash
-# Verify NEXT_PUBLIC_API_HOST is set correctly
-docker run -e NEXT_PUBLIC_API_HOST=https://dev.afya.fit/api afya-sitebuilder:test
+# Verify NEXT_PUBLIC_API_URL is set correctly
+docker run -e NEXT_PUBLIC_API_URL=https://dev.afya.fit/api afya-sitebuilder:test
 ```
 
 ### Kubernetes Issues

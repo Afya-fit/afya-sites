@@ -57,7 +57,7 @@ run_container() {
         --name ${CONTAINER_NAME} \
         -p ${PORT}:${PORT} \
         -e NODE_ENV=production \
-        -e NEXT_PUBLIC_API_HOST=http://localhost:8000 \
+        -e NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://example-api:8000} \
         ${IMAGE_NAME}:${IMAGE_TAG}
     
     echo -e "${GREEN}✓ Container started${NC}"
@@ -80,7 +80,7 @@ wait_for_ready() {
     while [ $attempt -lt $max_attempts ]; do
         if docker ps --filter name=${CONTAINER_NAME} --filter status=running | grep -q ${CONTAINER_NAME}; then
             # Check if port is responding
-            if curl -s http://localhost:${PORT}/sitebuilder > /dev/null 2>&1; then
+            if curl -s "http://127.0.0.1:${PORT}/sitebuilder" > /dev/null 2>&1; then
                 echo -e "${GREEN}✓ Container is ready!${NC}"
                 return 0
             fi
@@ -103,7 +103,7 @@ show_info() {
     echo -e "Container: ${CONTAINER_NAME}"
     echo -e "Port: ${PORT}"
     echo -e "\n${GREEN}=== Access URLs ===${NC}"
-    echo -e "Application: ${BLUE}http://localhost:${PORT}/sitebuilder${NC}"
+    echo -e "Application: ${BLUE}http://127.0.0.1:${PORT}/sitebuilder${NC}"
     echo -e "\n${GREEN}=== Useful Commands ===${NC}"
     echo -e "View logs:    ${BLUE}docker logs -f ${CONTAINER_NAME}${NC}"
     echo -e "Stop:         ${BLUE}docker stop ${CONTAINER_NAME}${NC}"

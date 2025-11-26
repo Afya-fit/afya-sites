@@ -13,9 +13,6 @@ find ./.next/ -type f -exec sed -i "s|!!NODE_ENV!!|$NODE_ENV|g" {} +
 # Replace API URL
 find ./.next/ -type f -exec sed -i "s|!!NEXT_PUBLIC_API_URL!!|$NEXT_PUBLIC_API_URL|g" {} +
 
-# Replace WebSocket URL
-find ./.next/ -type f -exec sed -i "s|!!NEXT_PUBLIC_WS_URL!!|$NEXT_PUBLIC_WS_URL|g" {} +
-
 echo "✅ Environment variables replaced"
 echo "🌐 Starting Next.js server on port ${PORT:-3000}..."
 

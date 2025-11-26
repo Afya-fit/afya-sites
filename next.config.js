@@ -7,20 +7,25 @@ const nextConfig = {
   output: 'standalone',
   
   // Standalone sitebuilder app configuration
-  basePath: process.env.NODE_ENV === 'production' ? '/sitebuilder' : '',
+  // Allow overriding basePath for different deployments; default to /sitebuilder only in production
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH ||
+    (process.env.NODE_ENV === 'production' ? '/sitebuilder' : ''),
   
   // API proxy to backend (for development)
   async rewrites() {
+    // In development we proxy API/platform calls to a backend host.
+    // Use NEXT_PUBLIC_API_URL as the single source of truth for the backend base URL.
     if (process.env.NODE_ENV === 'development') {
+      const devBackendHost = process.env.NEXT_PUBLIC_API_URL
       return [
         {
           source: '/api/:path*',
-          destination: 'http://localhost:8001/api/:path*', // Django backend (nginx proxy)
+          destination: `${devBackendHost}/api/:path*`, // Django backend (nginx proxy)
         },
         // Proxy all platform routes EXCEPT iframe-preview to Django
         {
           source: '/platform/((?!sites/iframe-preview).)*',
-          destination: 'http://localhost:8001/platform/$1', // Django platform routes
+          destination: `${devBackendHost}/platform/$1`, // Django platform routes
         },
       ];
     }

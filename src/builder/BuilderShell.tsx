@@ -8,7 +8,12 @@ function isValidSlug(s: string) {
 
 export default function BuilderShell() {
   const { businessId, slug, setSlug, lastSavedAt, platformData, draft } = useBuilder() as any
-  const url = slug ? `https://${slug}.sites.afya.fit` : 'https://[slug].sites.afya.fit'
+  // Build public site URL from environment so different clusters/domains can be used
+  const publicSitesDomain =
+    process.env.NEXT_PUBLIC_SITES_DOMAIN || 'sites.afya.fit'
+  const url = slug
+    ? `https://${slug}.${publicSitesDomain}`
+    : `https://[slug].${publicSitesDomain}`
   const valid = !slug || isValidSlug(slug)
   const [status, setStatus] = React.useState<'not_provisioned' | 'provisioning' | 'provisioned' | 'publishing' | 'live' | 'error'>('not_provisioned')
   const [copied, setCopied] = React.useState(false)
@@ -56,7 +61,10 @@ export default function BuilderShell() {
       if (status === 'not_provisioned') {
         // Provision step
         setStatus('provisioning')
-        const res = await provisionSite(businessId, { slug, apex_domain: 'sites.afya.fit' })
+        const res = await provisionSite(businessId, {
+          slug,
+          apex_domain: publicSitesDomain,
+        })
         if (res.ok) {
           setSlugReadOnly(true)
           setStatus('provisioned')

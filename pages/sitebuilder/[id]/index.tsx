@@ -140,7 +140,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
     // Check access by attempting to fetch draft
     // The backend RBAC will handle permission checking
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8001'
+    // Use NEXT_PUBLIC_API_URL as the single source of truth for the backend base URL
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL
     
     console.log('[Sitebuilder Auth] Checking access for business:', id)
     console.log('[Sitebuilder Auth] Making API call to:', `${apiUrl}/api/sitebuilder/${id}/draft/`)
