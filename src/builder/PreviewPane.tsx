@@ -115,7 +115,8 @@ export default function PreviewPane() {
     
     try {
       const configParam = encodeURIComponent(JSON.stringify(minimalConfig))
-      return `/platform/sites/iframe-preview/${businessId}?config=${configParam}`
+      // Use /sitebuilder path which is routed to sitebuilder service via K8s ingress
+      return `/sitebuilder/sites/iframe-preview/${businessId}?config=${configParam}`
     } catch (error) {
       console.error('Failed to generate iframe URL:', error)
       return ''
