@@ -144,7 +144,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL
     
     console.log('[Sitebuilder Auth] Checking access for business:', id)
-    console.log('[Sitebuilder Auth] Making API call to:', `${apiUrl}/api/sitebuilder/${id}/draft/`)
+    console.log('[Sitebuilder Auth] Making API call to:', `${apiUrl}/sitebuilder/${id}/draft/`)
     
     // Django uses session-based auth via cookies
     const cookieHeader = csrfToken 
@@ -161,7 +161,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       headers['X-CSRFToken'] = csrfToken
     }
     
-    const response = await fetch(`${apiUrl}/api/sitebuilder/${id}/draft/`, {
+    const response = await fetch(`${apiUrl}/sitebuilder/${id}/draft/`, {
       headers,
       credentials: 'include'
     })

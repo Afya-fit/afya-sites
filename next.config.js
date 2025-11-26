@@ -20,9 +20,21 @@ const nextConfig = {
       return [
         {
           source: '/api/:path*',
-          destination: `${devBackendHost}/api/:path*`, // Django backend (nginx proxy)
+          destination: `${devBackendHost}/:path*`, // Django backend (nginx proxy)
         },
         // Proxy all platform routes EXCEPT iframe-preview to Django
+        {
+          source: '/platform/((?!sites/iframe-preview).)*',
+          destination: `${devBackendHost}/platform/$1`, // Django platform routes
+        },
+      ];
+    }
+    else {
+      return [
+        {
+          source: '/api/:path*',
+          destination: `${devBackendHost}/:path*`, // Django backend (nginx proxy)
+        },
         {
           source: '/platform/((?!sites/iframe-preview).)*',
           destination: `${devBackendHost}/platform/$1`, // Django platform routes
