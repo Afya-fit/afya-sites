@@ -1,11 +1,13 @@
 # Build stage
 FROM node:18-alpine AS builder
 
-# Set build-time environment variables with placeholders
-ARG NODE_ENV
-ENV NODE_ENV $NODE_ENV
-ARG NEXT_PUBLIC_API_URL
-ENV NEXT_PUBLIC_API_URL $NEXT_PUBLIC_API_URL
+# Set build-time environment variables
+# basePath is hardcoded in next.config.js (same in all envs)
+# API_URL uses placeholder for runtime replacement
+ARG NODE_ENV=production
+ENV NODE_ENV=$NODE_ENV
+ARG NEXT_PUBLIC_API_URL="http://PLACEHOLDER_API_URL"
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 
 WORKDIR /app
 
@@ -13,7 +15,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies (including devDependencies for build)
-RUN npm ci && \
+RUN npm ci --include=dev && \
     npm cache clean --force
 
 # Copy source code

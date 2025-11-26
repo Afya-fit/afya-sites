@@ -7,9 +7,9 @@ const nextConfig = {
   output: 'standalone',
   
   // Standalone sitebuilder app configuration
-  // Base path is fully controlled by NEXT_PUBLIC_BASE_PATH so different Kubernetes
-  // environments (dev/prod) can share the same optimized build but different routing.
-  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
+  // basePath is hardcoded because it's the same in all environments (dev/staging/prod)
+  // This is DevOps "Build Once" compatible - the path /sitebuilder is constant everywhere
+  basePath: '/sitebuilder',
   
   // API proxy to backend (for development)
   async rewrites() {
