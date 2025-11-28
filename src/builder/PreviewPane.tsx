@@ -214,12 +214,10 @@ export default function PreviewPane() {
 
 
 function PreviewControls() {
-  const { device, setDevice, view, setView, businessId, draft, published, updateDraft, previewingVersionId, exitPreview } = useBuilder() as any
+  const { device, setDevice, view, setView, businessId, draft, published, updateDraft, previewingVersionId, exitPreview, hasUnpublishedChanges } = useBuilder() as any
   const [showVersionHistory, setShowVersionHistory] = useState(false)
   const [selectedVersionFromHistory, setSelectedVersionFromHistory] = useState<string | null>(null)
   
-  // Check if there are unpublished changes
-  const hasUnpublishedChanges = draft && published && JSON.stringify(draft) !== JSON.stringify(published)
   const hasPublishedVersion = !!published
   
   const openQAPreview = () => {
