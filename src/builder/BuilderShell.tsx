@@ -71,7 +71,7 @@ export default function BuilderShell() {
         } else {
           setStatus('error')
         }
-      } else if (status === 'provisioned') {
+      } else if (status === 'provisioned' || status === 'live') {
         // Publish step
         setStatus('publishing')
         const res = await publishSite(businessId, { slug, draft })
@@ -133,21 +133,21 @@ export default function BuilderShell() {
         {/* Device and view toggles moved into PreviewPane */}
         <button
           onClick={onProvisionOrPublish}
-          disabled={!slug || !valid || !draft || busy || (status === 'not_provisioned' ? false : status === 'provisioned' ? !hasUnpublishedChanges : true)}
+          disabled={!slug || !valid || !draft || busy || (status === 'not_provisioned' ? false : (status === 'provisioned' || status === 'live') ? !hasUnpublishedChanges : true)}
           title={
             !slug ? 'Enter a slug first' : 
             !valid ? 'Invalid slug' : 
             status === 'not_provisioned' ? 'Provision infrastructure for this site' :
-            status === 'provisioned' && !hasUnpublishedChanges ? 'No changes to publish' :
-            status === 'provisioned' ? 'Publish content to live site' :
+            (status === 'provisioned' || status === 'live') && !hasUnpublishedChanges ? 'No changes to publish' :
+            (status === 'provisioned' || status === 'live') ? 'Publish content to live site' :
             'Site is being processed'
           }
           style={{ 
             padding: '6px 10px', 
             borderRadius: 6, 
             border: '1px solid var(--sb-color-border)', 
-            opacity: (!slug || !valid || busy || (status === 'not_provisioned' ? false : status === 'provisioned' ? !hasUnpublishedChanges : true)) ? .6 : 1,
-            backgroundColor: status === 'provisioned' && hasUnpublishedChanges ? '#e6f6ec' : '#fff'
+            opacity: (!slug || !valid || busy || (status === 'not_provisioned' ? false : (status === 'provisioned' || status === 'live') ? !hasUnpublishedChanges : true)) ? .6 : 1,
+            backgroundColor: (status === 'provisioned' || status === 'live') && hasUnpublishedChanges ? '#e6f6ec' : '#fff'
           }}
         >
           {busy ? (
