@@ -58,6 +58,7 @@ run_container() {
         -p ${PORT}:${PORT} \
         -e NODE_ENV=production \
         -e NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://example-api:8000} \
+        -e NEXT_PUBLIC_BASE_PATH=/sitebuilder \
         ${IMAGE_NAME}:${IMAGE_TAG}
     
     echo -e "${GREEN}✓ Container started${NC}"

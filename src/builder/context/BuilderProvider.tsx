@@ -103,7 +103,13 @@ export function BuilderProvider({ businessId, children }: Props) {
 
   // Publish state: backend flag + local dirty tracking
   const [hasUnpublishedChanges, setHasUnpublishedChanges] = useState<boolean>(false)
-  const [isDirty, setIsDirty] = useState<boolean>(false)
+  const [isDirty, setIsDirtyInternal] = useState<boolean>(false)
+  
+  // Debug wrapper for setIsDirty
+  const setIsDirty = useCallback((value: boolean) => {
+    console.log('🔧 [BuilderProvider] setIsDirty:', value, new Error().stack?.split('\n')[2])
+    setIsDirtyInternal(value)
+  }, [])
 
   // NEW: Preview Mode State
   const [previewingVersionId, setPreviewingVersionId] = useState<string | null>(null)
@@ -440,8 +446,12 @@ export function BuilderProvider({ businessId, children }: Props) {
     },
     imageManagerOnSelect: imagePickerCallbackRef.current,
     
-    // Publish state tracking
-    hasUnpublishedChanges: hasUnpublishedChanges || isDirty,
+    // Publish state tracking - computed from backend flag OR local dirty flag
+    hasUnpublishedChanges: (() => {
+      const result = hasUnpublishedChanges || isDirty
+      console.log('🔍 [BuilderProvider] hasUnpublishedChanges computed:', result, '(backend:', hasUnpublishedChanges, ', isDirty:', isDirty, ')')
+      return result
+    })(),
     isDirty,
     
     // NEW: Preview Mode Interface
