@@ -7,7 +7,7 @@ function isValidSlug(s: string) {
 }
 
 export default function BuilderShell() {
-  const { businessId, slug, setSlug, lastSavedAt, platformData, draft } = useBuilder() as any
+  const { businessId, slug, setSlug, lastSavedAt, platformData, draft, published } = useBuilder() as any
   // Build public site URL from environment so different clusters/domains can be used
   const publicSitesDomain =
     process.env.NEXT_PUBLIC_SITES_DOMAIN || 'sites.afya.fit'
@@ -15,6 +15,8 @@ export default function BuilderShell() {
     ? `https://${slug}.${publicSitesDomain}`
     : `https://[slug].${publicSitesDomain}`
   const valid = !slug || isValidSlug(slug)
+  // Check if draft differs from published version
+  const hasUnpublishedChanges = draft && published && JSON.stringify(draft) !== JSON.stringify(published)
   const [status, setStatus] = React.useState<'not_provisioned' | 'provisioning' | 'provisioned' | 'publishing' | 'live' | 'error'>('not_provisioned')
   const [copied, setCopied] = React.useState(false)
   const [busy, setBusy] = React.useState(false)
@@ -131,11 +133,12 @@ export default function BuilderShell() {
         {/* Device and view toggles moved into PreviewPane */}
         <button
           onClick={onProvisionOrPublish}
-          disabled={!slug || !valid || !draft || busy || (status !== 'not_provisioned' && status !== 'provisioned')}
+          disabled={!slug || !valid || !draft || busy || (status === 'not_provisioned' ? false : status === 'provisioned' ? !hasUnpublishedChanges : true)}
           title={
             !slug ? 'Enter a slug first' : 
             !valid ? 'Invalid slug' : 
             status === 'not_provisioned' ? 'Provision infrastructure for this site' :
+            status === 'provisioned' && !hasUnpublishedChanges ? 'No changes to publish' :
             status === 'provisioned' ? 'Publish content to live site' :
             'Site is being processed'
           }
@@ -143,8 +146,8 @@ export default function BuilderShell() {
             padding: '6px 10px', 
             borderRadius: 6, 
             border: '1px solid var(--sb-color-border)', 
-            opacity: (!slug || !valid || busy || (status !== 'not_provisioned' && status !== 'provisioned')) ? .6 : 1,
-            backgroundColor: status === 'provisioned' ? '#e6f6ec' : '#fff'
+            opacity: (!slug || !valid || busy || (status === 'not_provisioned' ? false : status === 'provisioned' ? !hasUnpublishedChanges : true)) ? .6 : 1,
+            backgroundColor: status === 'provisioned' && hasUnpublishedChanges ? '#e6f6ec' : '#fff'
           }}
         >
           {busy ? (
