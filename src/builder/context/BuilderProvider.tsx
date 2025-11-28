@@ -38,6 +38,10 @@ type BuilderContextValue = {
   updateTheme: (patch: Record<string, any>) => void
   updateDraft: (patch: Partial<SiteConfig>) => void
   
+  // Publish state tracking (backend is source of truth, isDirty tracks local edits)
+  hasUnpublishedChanges: boolean
+  isDirty: boolean
+  
   // NEW: Preview Mode State
   previewingVersionId: string | null
   previewingConfig: SiteConfig | null
@@ -97,6 +101,10 @@ export function BuilderProvider({ businessId, children }: Props) {
   const [imageManagerFolder, setImageManagerFolder] = useState<string>('gallery')
   const imagePickerCallbackRef = useRef<null | ((url: string) => void)>(null)
 
+  // Publish state: backend flag + local dirty tracking
+  const [hasUnpublishedChanges, setHasUnpublishedChanges] = useState<boolean>(false)
+  const [isDirty, setIsDirty] = useState<boolean>(false)
+
   // NEW: Preview Mode State
   const [previewingVersionId, setPreviewingVersionId] = useState<string | null>(null)
   const [previewingConfig, setPreviewingConfig] = useState<SiteConfig | null>(null)
@@ -149,6 +157,10 @@ export function BuilderProvider({ businessId, children }: Props) {
         } else {
           setPublished(null)
         }
+        
+        // Update publish state from backend (authoritative source)
+        setHasUnpublishedChanges(draftResponse.data.has_unpublished_changes ?? false)
+        setIsDirty(false) // Reset local dirty flag after loading from backend
       }
       
       // Still load platform data from the public endpoint
@@ -354,6 +366,7 @@ export function BuilderProvider({ businessId, children }: Props) {
         next[index] = { ...next[index], ...patch } as SectionUnion
         return { ...prev, sections: next }
       })
+      setIsDirty(true)
     },
     addSection: (section: SectionUnion) => {
       setDraft(prev => {
@@ -361,6 +374,7 @@ export function BuilderProvider({ businessId, children }: Props) {
         const next = [...(prev.sections || []), section]
         return { ...prev, sections: next }
       })
+      setIsDirty(true)
     },
     removeSection: (index: number) => {
       setDraft(prev => {
@@ -369,12 +383,14 @@ export function BuilderProvider({ businessId, children }: Props) {
         next.splice(index, 1)
         return { ...prev, sections: next }
       })
+      setIsDirty(true)
     },
     updateTheme: (patch: Record<string, any>) => {
       setDraft(prev => {
         if (!prev) return prev
         return { ...prev, theme: { ...prev.theme, ...patch } }
       })
+      setIsDirty(true)
     },
     updateDraft: (patch: Partial<SiteConfig>) => {
       setDraft(prev => {
@@ -391,6 +407,7 @@ export function BuilderProvider({ businessId, children }: Props) {
         }
         return { ...prev, ...patch }
       })
+      setIsDirty(true)
     },
     save: async () => {
       try {
@@ -407,6 +424,7 @@ export function BuilderProvider({ businessId, children }: Props) {
         if (!prev) return prev
         return { ...prev, sections: next }
       })
+      setIsDirty(true)
     },
     openImageManager: (opts = {}) => {
       setImageManagerMode(opts.mode || 'manage')
@@ -420,6 +438,10 @@ export function BuilderProvider({ businessId, children }: Props) {
     },
     imageManagerOnSelect: imagePickerCallbackRef.current,
     
+    // Publish state tracking
+    hasUnpublishedChanges: hasUnpublishedChanges || isDirty,
+    isDirty,
+    
     // NEW: Preview Mode Interface
     previewingVersionId,
     previewingConfig,
@@ -427,7 +449,7 @@ export function BuilderProvider({ businessId, children }: Props) {
     startPreview,
     exitPreview,
     restoreVersion,
-  }), [businessId, slug, draft, published, platformData, view, device, reload, lastSavedAt, selectedIndex, panelView, previewingVersionId, previewingConfig, isPreviewMode, startPreview, exitPreview, restoreVersion])
+  }), [businessId, slug, draft, published, platformData, view, device, reload, lastSavedAt, selectedIndex, panelView, hasUnpublishedChanges, isDirty, previewingVersionId, previewingConfig, isPreviewMode, startPreview, exitPreview, restoreVersion])
 
   return (
     <BuilderContext.Provider value={value}>

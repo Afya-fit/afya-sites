@@ -7,7 +7,7 @@ function isValidSlug(s: string) {
 }
 
 export default function BuilderShell() {
-  const { businessId, slug, setSlug, lastSavedAt, platformData, draft, published } = useBuilder() as any
+  const { businessId, slug, setSlug, lastSavedAt, platformData, draft, hasUnpublishedChanges, reload } = useBuilder() as any
   // Build public site URL from environment so different clusters/domains can be used
   const publicSitesDomain =
     process.env.NEXT_PUBLIC_SITES_DOMAIN || 'sites.afya.fit'
@@ -15,8 +15,6 @@ export default function BuilderShell() {
     ? `https://${slug}.${publicSitesDomain}`
     : `https://[slug].${publicSitesDomain}`
   const valid = !slug || isValidSlug(slug)
-  // Check if draft differs from published version
-  const hasUnpublishedChanges = draft && published && JSON.stringify(draft) !== JSON.stringify(published)
   const [status, setStatus] = React.useState<'not_provisioned' | 'provisioning' | 'provisioned' | 'publishing' | 'live' | 'error'>('not_provisioned')
   const [copied, setCopied] = React.useState(false)
   const [busy, setBusy] = React.useState(false)
@@ -79,6 +77,8 @@ export default function BuilderShell() {
         const res = await publishSite(businessId, { slug, draft })
         if (res.ok && res.data?.run_id) {
           setStatus('live')
+          // Reload to update 'published' state so hasUnpublishedChanges recalculates
+          await reload()
         } else {
           setStatus('error')
         }
