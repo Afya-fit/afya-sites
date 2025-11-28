@@ -221,6 +221,8 @@ export function BuilderProvider({ businessId, children }: Props) {
           const result = await saveSiteDraft(businessId, { slug, draft })
           if (result.ok) {
             console.log('✅ Draft auto-saved to backend')
+            // NOTE: We do NOT clear isDirty here - it stays true until publish or reload
+            // This ensures the publish button remains active after edits
           } else {
             console.warn('⚠️ Backend autosave failed, localStorage saved')
           }
