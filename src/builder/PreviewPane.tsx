@@ -115,7 +115,8 @@ export default function PreviewPane() {
     
     try {
       const configParam = encodeURIComponent(JSON.stringify(minimalConfig))
-      return `/platform/sites/iframe-preview/${businessId}?config=${configParam}`
+      // Use /sitebuilder path which is routed to sitebuilder service via K8s ingress
+      return `/sitebuilder/sites/iframe-preview/${businessId}?config=${configParam}`
     } catch (error) {
       console.error('Failed to generate iframe URL:', error)
       return ''
@@ -213,12 +214,10 @@ export default function PreviewPane() {
 
 
 function PreviewControls() {
-  const { device, setDevice, view, setView, businessId, draft, published, updateDraft, previewingVersionId, exitPreview } = useBuilder() as any
+  const { device, setDevice, view, setView, businessId, draft, published, updateDraft, previewingVersionId, exitPreview, hasUnpublishedChanges } = useBuilder() as any
   const [showVersionHistory, setShowVersionHistory] = useState(false)
   const [selectedVersionFromHistory, setSelectedVersionFromHistory] = useState<string | null>(null)
   
-  // Check if there are unpublished changes
-  const hasUnpublishedChanges = draft && published && JSON.stringify(draft) !== JSON.stringify(published)
   const hasPublishedVersion = !!published
   
   const openQAPreview = () => {
@@ -230,7 +229,7 @@ function PreviewControls() {
     try {
       // Encode the site configuration for URL passing
       const configParam = encodeURIComponent(JSON.stringify(draft));
-      const previewUrl = `/platform/sites/preview/${businessId}?config=${configParam}`;
+      const previewUrl = `/sitebuilder/sites/preview/${businessId}?config=${configParam}`;
       
       // Open in new tab - completely standalone
       window.open(previewUrl, '_blank', 'noopener,noreferrer');

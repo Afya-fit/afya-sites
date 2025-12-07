@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  sitebuilder:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # We use placeholders during build (as per the new Dockerfile)
+        # The entrypoint.sh will replace them at runtime
+        NODE_ENV: production
+    image: afya-sitebuilder:local
+    container_name: afya-sitebuilder
+    ports:
+      - "3001:3000"
+    environment:
+      - NODE_ENV=production
+      # Runtime config: backend API URL (this varies by environment)
+      - NEXT_PUBLIC_API_URL=http://web:8000
+      # Note: basePath is hardcoded at build time (/sitebuilder) - same in all envs
+    networks:
+      - afya-platform_default
+    restart: unless-stopped
+
+networks:
+  afya-platform_default:
+    external: true
