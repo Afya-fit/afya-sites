@@ -49,8 +49,8 @@ export default function StandalonePreview({ config, businessId, platformData }: 
     sections: config?.sections?.length
   });
 
-  // Add debug info in development
-  const isDebug = process.env.NODE_ENV === 'development';
+  // Add debug info only when explicitly enabled
+  const isDebug = process.env.NEXT_PUBLIC_ENABLE_DEBUG === 'true';
   
   return (
     <>

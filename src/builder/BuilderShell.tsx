@@ -7,8 +7,13 @@ function isValidSlug(s: string) {
 }
 
 export default function BuilderShell() {
-  const { businessId, slug, setSlug, lastSavedAt, platformData, draft } = useBuilder() as any
-  const url = slug ? `https://${slug}.sites.afya.fit` : 'https://[slug].sites.afya.fit'
+  const { businessId, slug, setSlug, lastSavedAt, platformData, draft, hasUnpublishedChanges, reload } = useBuilder() as any
+  // Build public site URL from environment so different clusters/domains can be used
+  const publicSitesDomain =
+    process.env.NEXT_PUBLIC_SITES_DOMAIN || 'sites.afya.fit'
+  const url = slug
+    ? `https://${slug}.${publicSitesDomain}`
+    : `https://[slug].${publicSitesDomain}`
   const valid = !slug || isValidSlug(slug)
   const [status, setStatus] = React.useState<'not_provisioned' | 'provisioning' | 'provisioned' | 'publishing' | 'live' | 'error'>('not_provisioned')
   const [copied, setCopied] = React.useState(false)
@@ -56,19 +61,24 @@ export default function BuilderShell() {
       if (status === 'not_provisioned') {
         // Provision step
         setStatus('provisioning')
-        const res = await provisionSite(businessId, { slug, apex_domain: 'sites.afya.fit' })
+        const res = await provisionSite(businessId, {
+          slug,
+          apex_domain: publicSitesDomain,
+        })
         if (res.ok) {
           setSlugReadOnly(true)
           setStatus('provisioned')
         } else {
           setStatus('error')
         }
-      } else if (status === 'provisioned') {
+      } else if (status === 'provisioned' || status === 'live') {
         // Publish step
         setStatus('publishing')
         const res = await publishSite(businessId, { slug, draft })
         if (res.ok && res.data?.run_id) {
           setStatus('live')
+          // Reload to update 'published' state so hasUnpublishedChanges recalculates
+          await reload()
         } else {
           setStatus('error')
         }
@@ -123,20 +133,21 @@ export default function BuilderShell() {
         {/* Device and view toggles moved into PreviewPane */}
         <button
           onClick={onProvisionOrPublish}
-          disabled={!slug || !valid || !draft || busy || (status !== 'not_provisioned' && status !== 'provisioned')}
+          disabled={!slug || !valid || !draft || busy || (status === 'not_provisioned' ? false : (status === 'provisioned' || status === 'live') ? !hasUnpublishedChanges : true)}
           title={
             !slug ? 'Enter a slug first' : 
             !valid ? 'Invalid slug' : 
             status === 'not_provisioned' ? 'Provision infrastructure for this site' :
-            status === 'provisioned' ? 'Publish content to live site' :
+            (status === 'provisioned' || status === 'live') && !hasUnpublishedChanges ? 'No changes to publish' :
+            (status === 'provisioned' || status === 'live') ? 'Publish content to live site' :
             'Site is being processed'
           }
           style={{ 
             padding: '6px 10px', 
             borderRadius: 6, 
             border: '1px solid var(--sb-color-border)', 
-            opacity: (!slug || !valid || busy || (status !== 'not_provisioned' && status !== 'provisioned')) ? .6 : 1,
-            backgroundColor: status === 'provisioned' ? '#e6f6ec' : '#fff'
+            opacity: (!slug || !valid || busy || (status === 'not_provisioned' ? false : (status === 'provisioned' || status === 'live') ? !hasUnpublishedChanges : true)) ? .6 : 1,
+            backgroundColor: (status === 'provisioned' || status === 'live') && hasUnpublishedChanges ? '#e6f6ec' : '#fff'
           }}
         >
           {busy ? (

@@ -1,5 +1,5 @@
 import React, { useMemo, useEffect, useState } from 'react'
-import { BuilderProvider, BuilderShell, PreviewPane, SectionManager } from '../../../src'
+import { BuilderProvider, BuilderShell, PreviewPane, SectionManager } from '../../src'
 import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next'
 
@@ -140,10 +140,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
     // Check access by attempting to fetch draft
     // The backend RBAC will handle permission checking
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8001'
+    // Use NEXT_PUBLIC_API_URL as the single source of truth for the backend base URL
+    // We use a helper to access process.env to prevent Next.js from inlining the value at build time.
+    const getEnv = (key: string) => process.env[key]
+    const apiUrl = getEnv('NEXT_PUBLIC_API_URL') || 'http://localhost:8001'
     
     console.log('[Sitebuilder Auth] Checking access for business:', id)
-    console.log('[Sitebuilder Auth] Making API call to:', `${apiUrl}/api/sitebuilder/${id}/draft/`)
+    console.log('[Sitebuilder Auth] Making API call to:', `${apiUrl}/sitebuilder/${id}/draft/`)
     
     // Django uses session-based auth via cookies
     const cookieHeader = csrfToken 
@@ -160,7 +163,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       headers['X-CSRFToken'] = csrfToken
     }
     
-    const response = await fetch(`${apiUrl}/api/sitebuilder/${id}/draft/`, {
+    const response = await fetch(`${apiUrl}/sitebuilder/${id}/draft/`, {
       headers,
       credentials: 'include'
     })

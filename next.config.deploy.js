@@ -17,7 +17,7 @@ const nextConfig = {
   
   // API calls go directly to production backend
   env: {
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'https://api.afya.com',
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || '',
   },
   
   // Transpile the local package
