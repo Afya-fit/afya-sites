@@ -1,6 +1,6 @@
 import React from 'react'
 import { useBuilder } from './context/BuilderProvider'
-import { provisionSite, publishSite, getPublishStatus, getSiteSettings } from '../utils/api'
+import { provisionSite, publishSite, getProvisionStatus, getPublishStatus, getSiteSettings } from '../utils/api'
 
 function isValidSlug(s: string) {
   return /^[a-z0-9-]{2,50}$/.test(s)
@@ -20,6 +20,8 @@ export default function BuilderShell() {
   const [busy, setBusy] = React.useState(false)
   const [taskId, setTaskId] = React.useState<string | null>(null)
   const [slugReadOnly, setSlugReadOnly] = React.useState(false)
+  const pollingIntervalRef = React.useRef<NodeJS.Timeout | null>(null)
+
   // Load initial site settings on mount
   React.useEffect(() => {
     const loadSiteSettings = async () => {
@@ -34,6 +36,12 @@ export default function BuilderShell() {
           }
           if (provision_status) {
             setStatus(provision_status)
+            
+            // Auto-start polling if status is 'provisioning'
+            if (provision_status === 'provisioning') {
+              setBusy(true)
+              startProvisionPolling()
+            }
           }
         }
       } catch (error) {
@@ -43,12 +51,68 @@ export default function BuilderShell() {
     loadSiteSettings()
   }, [businessId, setSlug])
 
+  // Cleanup polling on unmount
+  React.useEffect(() => {
+    return () => {
+      if (pollingIntervalRef.current) {
+        clearInterval(pollingIntervalRef.current)
+      }
+    }
+  }, [])
+
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(url)
       setCopied(true)
       setTimeout(() => setCopied(false), 1200)
     } catch {}
+  }
+
+  const startProvisionPolling = () => {
+    // Clear any existing interval
+    if (pollingIntervalRef.current) {
+      clearInterval(pollingIntervalRef.current)
+    }
+    
+    let attempts = 0
+    const maxAttempts = 60 // 5 minutes (5 seconds * 60)
+    
+    pollingIntervalRef.current = setInterval(async () => {
+      attempts++
+      
+      // Timeout after 5 minutes
+      if (attempts >= maxAttempts) {
+        if (pollingIntervalRef.current) {
+          clearInterval(pollingIntervalRef.current)
+        }
+        setStatus('error')
+        setBusy(false)
+        console.error('Provision timed out after 5 minutes')
+        return
+      }
+      
+      // Check provision status
+      const statusRes = await getProvisionStatus(businessId)
+      
+      if (statusRes.ok && statusRes.data?.status === 'provisioned') {
+        // Success! Site is live
+        if (pollingIntervalRef.current) {
+          clearInterval(pollingIntervalRef.current)
+        }
+        setStatus('provisioned')
+        setBusy(false)
+        console.log('Site provisioned successfully!')
+      } else if (!statusRes.ok || statusRes.data?.status === 'error') {
+        // Error occurred
+        if (pollingIntervalRef.current) {
+          clearInterval(pollingIntervalRef.current)
+        }
+        setStatus('error')
+        setBusy(false)
+        console.error('Provision failed:', statusRes.data)
+      }
+      // If still provisioning, keep polling
+    }, 5000) // Poll every 5 seconds
   }
 
   const onProvisionOrPublish = async () => {
@@ -67,9 +131,11 @@ export default function BuilderShell() {
         })
         if (res.ok) {
           setSlugReadOnly(true)
-          setStatus('provisioned')
+          // Start polling instead of immediately marking as provisioned
+          startProvisionPolling()
         } else {
           setStatus('error')
+          setBusy(false)
         }
       } else if (status === 'provisioned' || status === 'live') {
         // Publish step
@@ -82,11 +148,11 @@ export default function BuilderShell() {
         } else {
           setStatus('error')
         }
+        setBusy(false)
       }
     } catch (error) {
       console.error('Failed to provision/publish:', error)
       setStatus('error')
-    } finally {
       setBusy(false)
     }
   }

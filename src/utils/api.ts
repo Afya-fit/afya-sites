@@ -130,6 +130,20 @@ export async function getSiteSettings(businessId: string) {
   }
 }
 
+export async function getProvisionStatus(businessId: string) {
+  try {
+    const response = await fetch(`/api/sitebuilder/${businessId}/provision-status`, {
+      credentials: 'same-origin',
+      referrerPolicy: 'same-origin'
+    });
+    const data = await response.json();
+    return { ok: response.ok, data };
+  } catch (error) {
+    console.error('Failed to get provision status:', error);
+    return { ok: false, error };
+  }
+}
+
 export async function getPublishStatus(taskId: string) {
   try {
     const response = await fetch(`/api/sitebuilder/publish/status/${taskId}`, {
