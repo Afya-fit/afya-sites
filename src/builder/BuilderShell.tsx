@@ -75,7 +75,7 @@ export default function BuilderShell() {
     }
     
     let attempts = 0
-    const maxAttempts = 60 // 5 minutes (5 seconds * 60)
+    const maxAttempts = 30 // 5 minutes (10 seconds * 30)
     
     pollingIntervalRef.current = setInterval(async () => {
       attempts++
@@ -112,7 +112,7 @@ export default function BuilderShell() {
         console.error('Provision failed:', statusRes.data)
       }
       // If still provisioning, keep polling
-    }, 5000) // Poll every 5 seconds
+    }, 10000) // Poll every 10 seconds
   }
 
   const onProvisionOrPublish = async () => {
